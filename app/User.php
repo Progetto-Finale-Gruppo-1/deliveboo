@@ -18,6 +18,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\User_info');
     }
 
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
