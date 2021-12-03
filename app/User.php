@@ -22,6 +22,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Category');
     }
 
+    public function dishes() {
+        return $this->hasMany('App\Models\Dish');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
