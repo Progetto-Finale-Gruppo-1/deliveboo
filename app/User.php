@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function types(){
+        return $this->belongsToMany('App\Models\Type');
+    }
+
     public function userinfo(){
         return $this->hasOne('App\Models\User_info');
     }
