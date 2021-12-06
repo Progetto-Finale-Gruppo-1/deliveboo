@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guests.home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')
+->middleware('auth')
+->namespace('Admin')
+->name('admin.')
+->group(function(){
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
+    Route::resource('dishes', DishController::class);
+});
