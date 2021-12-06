@@ -24,9 +24,9 @@ class DishesTableSeeder extends Seeder
             $newDish->user_id = Arr::random($user_ids);
             $newDish->name = $faker->sentence(4);
             $newDish->description = $faker->text();
-            $newDish->avaiable = $faker->numberBetween(0, 1);
+            $newDish->available = $faker->numberBetween(0, 1);
             $newDish->price = $faker->numberBetween(0, 1000);
-            $newDish->weight = $faker->numberBetween(2, 100);
+            $newDish->weigth = $faker->numberBetween(2, 100);
 
             $newDish->save();
         }
