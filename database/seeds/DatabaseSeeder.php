@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Ingredient;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeederTable::class,
             UserInfoSeeder::class,
             DishesTableSeeder::class,
-            // IngredientSeederTable::class,   
+            IngredientSeederTable::class,   
             DishOrderSeederTable::class,
             TypeUserSeederTable::class,         
         ]);
