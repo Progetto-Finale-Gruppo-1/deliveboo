@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = User::find(Auth::user()->id);
-        // dd($user->dishes);
+        
         return view('admin.dashboard',compact('user'));
     }
 }
