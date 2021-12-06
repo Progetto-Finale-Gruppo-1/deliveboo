@@ -20,8 +20,8 @@ class UserInfoSeeder extends Seeder
             $newInfo = new User_info();
             $newInfo->user_id = $user;
             $newInfo->iva = $faker->numerify('###########');
-            $newInfo->address = $faker->words(8, true);
-            $newInfo->city = $faker->words(3, true);
+            $newInfo->address = $faker->streetName();
+            $newInfo->city = $faker->city();
             $newInfo->zip_code = $faker->numerify('#####');
             $newInfo->phone = $faker->numerify('#############');
             $newInfo->image = $faker->imageUrl(1280, 720);;
