@@ -4,10 +4,11 @@
 
     <div class="container"> 
 
-        @if (session('delete_title'))
-            <div class="alert alert-warning">
+        @if (session('message'))
+            <div class="alert alert-success">
                 {{session('message')}}
-            </div>            
+                
+            </div>
         @endif
 
         <a class="btn btn-secondary mb-3" href="{{ route('admin.dishes.create') }}">crea un nuovo piatto</a>
