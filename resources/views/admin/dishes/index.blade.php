@@ -20,6 +20,7 @@
             <thead>
             <tr>
                 <th scope="col">Nome del piatto</th>
+                <th scope="col">Disponibilità</th>
                 <th scope="col">Modifica</th>
                 <th scope="col">Elimina</th>
             </tr>
@@ -29,6 +30,7 @@
                 @forelse ($dishes as $dish)
                     <tr>
                         <th scope="row"><h3>Nome piatto: {{ $dish->name }}</h3></th>
+                        <th scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
                         <td><a class="btn btn-primary" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
                         <td>
                             

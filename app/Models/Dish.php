@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dish extends Model
 {
 
-    protected $fillable = ['user_id', 'name', 'description', "available" => 0, "price", "weigth"];
+    protected $fillable = ['user_id', 'name', 'description', "available", "price", "weigth"];
 
     // public function setValue(){
     //     if

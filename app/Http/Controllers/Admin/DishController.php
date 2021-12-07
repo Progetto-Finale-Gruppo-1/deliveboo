@@ -39,9 +39,27 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['user_id'] = Auth::user()->id;
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:200',
+            'price' => 'required|min:1|max:9999',
+            'weigth' => 'nullable|string|max:255',
+        ],
+        [
+            "required" => "Inserisci un campo valido per :attribute",
+            "price.required" => "Inserisci un prezzo valido",
+        ]);
 
+        $data = $request->all();
+
+        if($request->has('available')){
+            $data['available'] = 1;
+            } else {
+            $data['available']= 0;
+            };
+
+        
+        $data['user_id'] = Auth::user()->id;
         $newDish = new Dish();
         $newDish->fill($data);
         $newDish->save();
@@ -78,9 +96,29 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Dish $dish)
     {
+        
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:200',
+            'price' => 'required|min:1|max:9999',
+            'weigth' => 'nullable|string|max:255',
+        ],
+        [
+            "required" => "Inserisci un campo valido per :attribute",
+            "price.required" => "Inserisci un prezzo valido",
+        ]);
+
         $data = $request->all();
+
+        if($request->has('available')){
+            $data['available'] = 1;
+            } else {
+            $data['available']= 0;
+            };
+
+        
         $data['user_id'] = Auth::user()->id;
 
         // if($data['available']) {
@@ -89,11 +127,11 @@ class DishController extends Controller
         //     $data['available'] = 1;
         // }
         // dd($data['available']);
-        $newDish = new Dish();
-        $newDish->fill($data);
-        $newDish->save();
+        
+        $dish->fill($data);
+        $dish->update();
 
-        return redirect()->route('admin.dishes.show', $newDish->id);
+        return redirect()->route('admin.dishes.show', compact('dish'));
 
     }
 
