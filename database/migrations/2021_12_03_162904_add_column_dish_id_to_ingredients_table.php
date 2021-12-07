@@ -16,7 +16,7 @@ class AddColumnDishIdToIngredientsTable extends Migration
         Schema::table('ingredients', function (Blueprint $table) {
             $table->unsignedBigInteger('dish_id');
 
-            $table->foreign('dish_id')->references('id')->on('dishes');
+            $table->foreign('dish_id')->references('id')->on('dishes')->onDelete('cascade');
         });
     }
 
