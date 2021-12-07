@@ -28,7 +28,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dishes.create');
     }
 
     /**
@@ -59,9 +59,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        // $dish = 'contorno';
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -73,7 +74,10 @@ class DishController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $newDish = new Dish();
+
     }
 
     /**

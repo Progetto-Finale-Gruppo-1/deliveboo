@@ -17,8 +17,6 @@
                     {{ __('You are logged in!') }}
                     <h2>Nome Ristorante: {{ $user->name }}</h2>
                     
-                    <p>Partita Iva: {{ $user->userinfo->iva }}</p>
-                    
                     <a href="{{ route('admin.dishes.index')}}">I tuoi Piatti</a>
                 </div>
             </div>
