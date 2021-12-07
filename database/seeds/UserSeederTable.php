@@ -13,13 +13,22 @@ class UserSeederTable extends Seeder
      */
     public function run(Faker $faker)
     {
+        $newUser = new User();
+        $newUser->name = 'user prova';
+        $newUser->email = 'emaildiprova@gmail.com';
+        $newUser->password = bcrypt('ciao1234');
+
+        $newUser->save();
+    
+
         for($i=0;$i<27;$i++){
+        
 
             $user = new User();
 
             $user->name = $faker->name();
             $user->email = $faker->email();
-            $user->password = $faker->password();
+            $user->password = bcrypt($faker->password());
             //$user->category_id = $faker->randomNumber(3);
 
             $user->save();
