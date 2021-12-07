@@ -103,8 +103,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        //
+        $dish->delete();
+        // dd($dish);
+        return redirect()->route('admin.dishes.index')->with('deleted_title', $dish->name)->with('message','Il piatto è stato eliminato');
     }
 }
