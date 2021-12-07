@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.dishes.union')
+    @include('admin.dishes.unificated.union')
 @endsection

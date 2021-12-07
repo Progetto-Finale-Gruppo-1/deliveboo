@@ -39,7 +39,14 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+
+        $newDish = new Dish();
+        $newDish->fill($data);
+        $newDish->save();
+
+        return redirect()->route('admin.dishes.show', $newDish->id);
     }
 
     /**
@@ -61,7 +68,6 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        // $dish = 'contorno';
         return view('admin.dishes.edit', compact('dish'));
     }
 

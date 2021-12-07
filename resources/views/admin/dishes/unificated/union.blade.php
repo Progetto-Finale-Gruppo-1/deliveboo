@@ -1,6 +1,6 @@
 <div class="container">
     {{-- @dd($dish) --}}
-    <form action="{{ request()->routeIs('admin.dishes.create') ? route('admin.dishes.create') : route('admin.dishes.edit', $dish->id) }}" method="POST">
+    <form action="{{ request()->routeIs('admin.dishes.create') ? route('admin.dishes.store') : route('admin.dishes.update', $dish->id) }}" method="POST">
         @csrf
 
         @if ( request()->routeIs('admin.dishes.edit') )
