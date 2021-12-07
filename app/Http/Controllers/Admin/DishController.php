@@ -28,7 +28,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dishes.create');
     }
 
     /**
@@ -39,7 +39,14 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+
+        $newDish = new Dish();
+        $newDish->fill($data);
+        $newDish->save();
+
+        return redirect()->route('admin.dishes.show', $newDish->id);
     }
 
     /**
@@ -48,9 +55,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dish $dish)
     {
-        //
+        return view('admin.dishes.show', compact('dish'));
     }
 
     /**
@@ -59,9 +66,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -71,9 +78,23 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+
+        // if($data['available']) {
+        //     $data['available'] = 1;
+        // }else {
+        //     $data['available'] = 1;
+        // }
+        // dd($data['available']);
+        $newDish = new Dish();
+        $newDish->fill($data);
+        $newDish->save();
+
+        return redirect()->route('admin.dishes.show', $newDish->id);
+
     }
 
     /**
