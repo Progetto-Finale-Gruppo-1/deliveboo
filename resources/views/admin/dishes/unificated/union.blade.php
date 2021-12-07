@@ -29,11 +29,9 @@
             <input type="text" class="form-control" id="weigth" placeholder="Another input placeholder" value="{{ request()->routeIs('admin.dishes.edit') ? $dish->weigth : '' }}" name="weigth">
         </div>
 
-        <div class="form-check mb-5">
-            <input class="form-check-input" type="checkbox" value="1" id="available" name="available">
-            <label class="form-check-label" for="available">
-                Disponibilità
-            </label>
+        <div class="form-check mb-5 avaliable">
+            <input class="form-check-input" type="checkbox" value="0" id="available" name="available">
+            <label class="form-check-label" for="available"> Non più disponibile </label>
         </div>
 
 
