@@ -1,5 +1,16 @@
 <div class="container">
     {{-- @dd($dish) --}}
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>        
+    @endif
+    
     <form action="{{ request()->routeIs('admin.dishes.create') ? route('admin.dishes.store') : route('admin.dishes.update', $dish->id) }}" method="POST">
         @csrf
 
