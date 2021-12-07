@@ -42,7 +42,7 @@
 
         <div class="form-check mb-5 avaliable">
             <input class="form-check-input" type="checkbox" value="0" id="available" name="available">
-            <label class="form-check-label" for="available"> Non più disponibile </label>
+            <label class="form-check-label" for="available"> Available </label>
         </div>
 
 
