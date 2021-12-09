@@ -31,3 +31,10 @@ Route::prefix('admin')
 
     Route::resource('orders', OrderController::class)->only('index');
 });
+
+
+Route::prefix('guest')
+->namespace('Guest')
+->group(function(){
+    Route::resource('dish', 'DischController')->only('show');
+});
