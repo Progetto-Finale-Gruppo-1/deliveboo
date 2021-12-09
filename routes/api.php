@@ -23,5 +23,6 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Api')
 ->name('api.')
 ->group(function(){
-    Route::resource('dishes', 'DishController');
+    Route::resource('dishes', 'DishController')->only('index');
+    Route::resource('category', 'CategoryController')->only('index');
 });

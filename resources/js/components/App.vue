@@ -7,6 +7,8 @@
                         <img src="#" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
+                            <p>{{ dish.user.id }}</p>
+                            <p>{{ dish.user.category_id }}</p>
                             <p class="card-text">{{ dish.description }}</p>
                             <a :href="`/guest/dish/${ dish.id }`" class="btn btn-primary">Go somewhere</a>
                         </div>
@@ -25,20 +27,34 @@ export default {
     data(){
         return{
             dishes: [],
+            categories: [],
         }
     },
 
     methods: {
-        list(){
+        dishList(){
             axios.get('/api/dishes')
             .then((res) => {
                 this.dishes = [...res.data.data]
             })
+        },
+
+        categoryList(){
+            axios.get('/api/category')
+            .then((res) => {
+                this.categories = [...res.data]
+            })
         }
     },
+    // computed: {
+    //     category(catId){
+    //         console.log(catId);
+    //     }
+    // },
 
     mounted(){
-        this.list()
+        this.dishList()
+        this.categoryList()
     },
 }
 </script>

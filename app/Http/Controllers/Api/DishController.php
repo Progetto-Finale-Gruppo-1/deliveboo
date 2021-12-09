@@ -15,7 +15,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $data = Dish::paginate(15);
+        $data = Dish::with('user')->paginate(6);
 
         return response()->json($data);
     }

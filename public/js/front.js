@@ -1940,24 +1940,40 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   data: function data() {
     return {
-      dishes: []
+      dishes: [],
+      categories: []
     };
   },
   methods: {
-    list: function list() {
+    dishList: function dishList() {
       var _this = this;
 
       axios.get('/api/dishes').then(function (res) {
         _this.dishes = _toConsumableArray(res.data.data);
       });
+    },
+    categoryList: function categoryList() {
+      var _this2 = this;
+
+      axios.get('/api/category').then(function (res) {
+        _this2.categories = _toConsumableArray(res.data);
+      });
     }
   },
+  // computed: {
+  //     category(catId){
+  //         console.log(catId);
+  //     }
+  // },
   mounted: function mounted() {
-    this.list();
+    this.dishList();
+    this.categoryList();
   }
 });
 
@@ -37569,6 +37585,10 @@ var render = function () {
                   _c("h5", { staticClass: "card-title" }, [
                     _vm._v(_vm._s(dish.name)),
                   ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(dish.user.id))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(dish.user.category_id))]),
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
                     _vm._v(_vm._s(dish.description)),
