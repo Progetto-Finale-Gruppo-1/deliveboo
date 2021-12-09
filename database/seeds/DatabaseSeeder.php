@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
             CategorySeedTable::class,
             TypeSeederTable::class,
             UserSeederTable::class,
-            UserInfoSeeder::class,
             DishesTableSeeder::class,
             IngredientSeederTable::class,   
             DishOrderSeederTable::class,

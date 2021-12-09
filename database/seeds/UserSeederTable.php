@@ -17,6 +17,13 @@ class UserSeederTable extends Seeder
         $newUser->name = 'user prova';
         $newUser->email = 'emaildiprova@gmail.com';
         $newUser->password = bcrypt('ciao1234');
+        $newUser->iva = $faker->numerify('###########');
+        $newUser->address = $faker->streetName();
+        $newUser->city = $faker->city();
+        $newUser->zip_code = $faker->numerify('#####');
+        $newUser->phone = $faker->numerify('#############');
+        $newUser->image = 'https://via.placeholder.com/1280x720.png?text=Nome+Del+Ristorante';
+        $newUser->description = $faker->text(100);
 
         $newUser->save();
     
@@ -29,7 +36,13 @@ class UserSeederTable extends Seeder
             $user->name = $faker->name();
             $user->email = $faker->email();
             $user->password = bcrypt($faker->password());
-            //$user->category_id = $faker->randomNumber(3);
+            $user->iva = $faker->numerify('###########');
+            $user->address = $faker->streetName();
+            $user->city = $faker->city();
+            $user->zip_code = $faker->numerify('#####');
+            $user->phone = $faker->numerify('#############');
+            $user->image = 'https://via.placeholder.com/1280x720.png?text=Nome+Del+Ristorante';
+            $user->description = $faker->text(100);
 
             $user->save();
         }
