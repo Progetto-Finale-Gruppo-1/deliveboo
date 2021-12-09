@@ -10,8 +10,8 @@
                 <tr>
                     <th scope="col">N. Ordine</th>
                     <th scope="col">Nome & Cognome</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Indirizzo</th>
+                    {{-- <th scope="col">Telefono</th>
+                    <th scope="col">Indirizzo</th> --}}
                     <th scope="col">Data Ordine</th>
                 </tr>
                 </thead>
@@ -20,9 +20,9 @@
                     @forelse ($orders as $order)
                         <tr>
                             <th scope="row">{{$order->id}}</th>
-                            <td>{{$order->name . ' ' .$order->surname}}</td>                            
-                            <td>{{$order->phone}}</td>
-                            <td>{{$order->city . ', ' . $order->address . ', ' . $order->zip_code}}</td>
+                            <td><a href="{{ route('admin.orders.show', $order->id)}}">{{$order->name . ' ' .$order->surname}}</a> </td>                            
+                            {{-- <td>{{$order->phone}}</td>
+                            <td>{{$order->city . ', ' . $order->address . ', ' . $order->zip_code}}</td> --}}
                             <td>{{$order->created_at}}</td>
                         </tr>
                     @empty
