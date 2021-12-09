@@ -29,7 +29,7 @@ Route::prefix('admin')
 
     Route::resource('dishes', DishController::class);
 
-    Route::resource('orders', OrderController::class)->only('index');
+    Route::resource('orders', OrderController::class)->only('index', 'show');
 });
 
 
