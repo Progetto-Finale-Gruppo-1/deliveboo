@@ -28,4 +28,6 @@ Route::prefix('admin')
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::resource('dishes', DishController::class);
+
+    Route::resource('orders', OrderController::class)->only('index');
 });
