@@ -18,6 +18,8 @@
                     <h2>Nome Ristorante: {{ $user->name }}</h2>
                     
                     <a href="{{ route('admin.dishes.index')}}">I tuoi Piatti</a>
+                    
+                    <a href="{{ route('admin.orders.index')}}">Ordini ricevuti</a>
                 </div>
             </div>
         </div>
