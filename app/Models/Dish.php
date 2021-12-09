@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dish extends Model
 {
 
-    protected $fillable = ['user_id', 'name', 'description', "available", "price", "weigth"];
+    protected $fillable = ['user_id', 'name', 'description', "available", "price", "weigth", "image"];
 
     // public function setValue(){
     //     if
@@ -24,4 +24,13 @@ class Dish extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function getImagePrefix(){
+        if ( str_starts_with($this->image, "dishes/images")){
+            
+            return asset('storage') . '/';
+        }
+        return "";
+    }
+
 }

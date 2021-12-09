@@ -2,11 +2,11 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
+use App\Models\Dish;
 use App\User;
 
 use Faker\Generator as Faker;
 
-use App\Models\Dish;
 
 class DishesTableSeeder extends Seeder
 {
@@ -27,6 +27,7 @@ class DishesTableSeeder extends Seeder
             $newDish->available = $faker->numberBetween(0, 1);
             $newDish->price = $faker->numberBetween(0, 1000);
             $newDish->weigth = $faker->numberBetween(2, 100);
+            $newDish->image = 'https://via.placeholder.com/900x150.png?text=Ragazzi+Ciao';
 
             $newDish->save();
         }

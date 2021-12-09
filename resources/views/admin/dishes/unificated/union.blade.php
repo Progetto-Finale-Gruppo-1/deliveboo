@@ -11,7 +11,7 @@
         </div>        
     @endif
     
-    <form action="{{ request()->routeIs('admin.dishes.create') ? route('admin.dishes.store') : route('admin.dishes.update', $dish->id) }}" method="POST">
+    <form action="{{ request()->routeIs('admin.dishes.create') ? route('admin.dishes.store') : route('admin.dishes.update', $dish->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         @if ( request()->routeIs('admin.dishes.edit') )
@@ -43,6 +43,11 @@
         <div class="form-check mb-5 avaliable">
             <input class="form-check-input" type="checkbox" value="0" id="available" name="available">
             <label class="form-check-label" for="available"> Available </label>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Immagine</label>
+            <input class="form-control" type="file" id="image" name="image" placeholder="Inserisci un immagine" value="{{ request()->routeIs('admin.dishes.edit') ? $dish->image : '' }}">
         </div>
 
 
