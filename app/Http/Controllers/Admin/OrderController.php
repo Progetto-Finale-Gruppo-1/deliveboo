@@ -73,14 +73,14 @@ class OrderController extends Controller
         ->orderBy('orders.created_at', 'desc')
         ->get();
 
-        dd($order->dishes);
+        // dd($order->dishes);
 
         
-        if(Auth::user()->id == $order->dishes){
-                return view('admin.orders.show', compact('order'));
-            }else{
-                return abort(404);
-            }
+        // if(Auth::user()->id == $order->dishes){
+        //         return view('admin.orders.show', compact('order'));
+        //     }else{
+        //         return abort(404);
+        //     }
 
         
         return view('admin.orders.show', compact('order'));
