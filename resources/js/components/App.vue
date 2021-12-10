@@ -1,7 +1,6 @@
 <template>
 
     <div class="container">
-        <input type="text" v-model="input">
         <div v-for="type in types" :key="type.id" class="d-inline mx-2 input">
             <input type="radio" :id="`input${type.id}`" :value="type.id" v-model="checked">
             <label :for="`input${type.id}`">{{ type.name }}</label>
@@ -32,7 +31,6 @@ export default {
     name: 'App',
     data(){
         return{
-            input: '',      // input ricerca type:text
             users: [],      // array degli user
             types: [],      // array dei tipi di ristorante
             checked: '',    // array di ingredienti checcati
@@ -46,22 +44,9 @@ export default {
         typesList(){
             axios.get('/api/type').then(res => this.types = [...res.data])
         },
-        // getCheck(){
-        //     console.log(this.checked);
-        // }
     },
 
     computed: {
-        // filterUser(){
-        //     this.users.filter((user) => {
-        //         return user.types.filter(type => {
-        //             return type.name == 'Mexican'
-        //         })
-        //     })
-        //     console.log(this.users);
-        // },
-
-
         filterUser: function(){
             return this.users.filter((user) => {
                 if(user.category !== null) return user.category.name.toLowerCase().match(this.input.toLowerCase())
@@ -82,7 +67,6 @@ export default {
     mounted(){
         this.usersList()
         this.typesList()
-        // console.log(this.filterType());
     },
     
 }
