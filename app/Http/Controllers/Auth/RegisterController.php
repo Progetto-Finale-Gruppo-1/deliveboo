@@ -53,13 +53,16 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'iva' => ['required'],
-            'address' => ['required'],
-            'city' => ['required'],
-            'zip_code' => ['required'],
-            'phone' => ['required'],
+            'iva' => ['required', 'digits:11'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'zip_code' => ['required', 'digits:5'],
+            'phone' => ['required', 'numeric'],
             'image' => ['required'],
-            'description' => ['nullable'],
+            'description' => ['string', 'nullable'],
+        ],
+        [
+            'required.name' => "Inserire un nomer per l'attività",
         ]);
     }
 
