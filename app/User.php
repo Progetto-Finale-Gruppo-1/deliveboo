@@ -25,6 +25,14 @@ class User extends Authenticatable
     public function dishes() {
         return $this->hasMany('App\Models\Dish');
     }
+    
+    public function getImagePrefix(){
+        if ( str_starts_with($this->image, "users/images")){
+            
+            return asset('storage') . '/';
+        }
+        return "";
+    }
 
     /**
      * The attributes that are mass assignable.
