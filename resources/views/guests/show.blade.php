@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <p>{{ $dish->name }}</p>
+    <p>{{ $user->name }}</p>
 @endsection
