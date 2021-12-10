@@ -58,32 +58,32 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        // if(Auth::user()->id == $order->dishes->user_id){
-        //     return view('admin.orders.show', compact('order'));
-        // }else{
-        //     return abort(404);
-        // }
-
         $orders = DB::table('orders')
         ->join('dish_order', 'dish_order.order_id', '=', 'orders.id' )
         ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
         ->join('users', 'users.id', '=', 'dishes.user_id')
-        ->select('orders.*')
+        ->select('orders.*', 'dishes.user_id')
         ->where('dishes.user_id', '=', Auth::user()->id)
-        ->orderBy('orders.created_at', 'desc')
+        // ->orderBy('orders.created_at', 'desc')
         ->get();
 
-        // dd($order->dishes);
-
         
-        // if(Auth::user()->id == $order->dishes){
-        //         return view('admin.orders.show', compact('order'));
-        //     }else{
-        //         return abort(404);
-        //     }
-
         
-        return view('admin.orders.show', compact('order'));
+        for($i = 0; $i < count($orders); ++$i) {
+            
+            if($orders[$i]->id == $order->id){
+                return view('admin.orders.show', compact('order')); 
+            }else{
+                return abort(404);
+            }
+
+            
+        }
+        
+        // return view('admin.orders.show', compact('order', 'orders'));
+        
+        
+        
     }
 
     /**
