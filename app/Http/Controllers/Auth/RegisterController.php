@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -48,11 +49,21 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    {        
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'iva' => ['required', 'digits:11'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'zip_code' => ['required', 'digits:5'],
+            'phone' => ['required', 'numeric'],
+            'image' => ['image'],
+            'description' => ['string', 'nullable'],
+        ],
+        [
+            'required.name' => "Inserire un nomer per l'attività",
         ]);
     }
 
@@ -63,11 +74,19 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {        
+        $data['image'] = Storage::put('users/images', $data['image']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'iva' => $data['iva'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'zip_code' => $data['zip_code'],
+            'phone' => $data['phone'],
+            'image' => $data['image'],
+            'description' => $data['description'],            
         ]);
     }
 }

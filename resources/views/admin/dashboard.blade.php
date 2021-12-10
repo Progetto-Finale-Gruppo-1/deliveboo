@@ -16,7 +16,10 @@
 
                     {{ __('You are logged in!') }}
                     <h2>Nome Ristorante: {{ $user->name }}</h2>
-                    
+
+                    <div>
+                        <img class="img-fluid" src="{{ $user->getImagePrefix() . $user->image}}" alt="{{$user->name}} copertina immagine">
+                    </div>
                     <a href="{{ route('admin.dishes.index')}}">I tuoi Piatti</a>
                     
                     <a href="{{ route('admin.orders.index')}}">Ordini ricevuti</a>
