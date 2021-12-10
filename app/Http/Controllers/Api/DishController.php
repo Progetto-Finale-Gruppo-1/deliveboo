@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dish;
+use App\User;
 use Illuminate\Http\Request;
 
 class DishController extends Controller
@@ -15,7 +16,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $data = Dish::with('user')->paginate(6);
+        $data = User::with('category')->with('dishes')->get();
 
         return response()->json($data);
     }
