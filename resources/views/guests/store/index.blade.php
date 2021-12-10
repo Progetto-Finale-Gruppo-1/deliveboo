@@ -48,7 +48,7 @@
             window.cart.forEach(function(item, i){
                 count += Number(item.qty);
             });
-            $('items-in-cart').html(count);
+            $('#items-in-cart').html(count);
         }
     </script>
 @endsection
