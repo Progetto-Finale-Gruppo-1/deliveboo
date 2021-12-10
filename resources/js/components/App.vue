@@ -12,10 +12,10 @@
                         <img src="#" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="d-none" v-if="user.category == null"></h5>
-                            <p >{{ user.name }}</p>
+                            <p>{{ user.name }}</p>
                             <p v-for="type in user.types" :key="type.id">{{ type.name }}</p>
                             <p class="card-text">{{ user.description }}</p>
-                            <a :href="`/guest/dish/${ user.id }`" class="btn btn-primary">Go somewhere</a>
+                            <a :href="`/guest/user/${ user.id }`" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>

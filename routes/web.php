@@ -36,5 +36,5 @@ Route::prefix('admin')
 Route::prefix('guest')
 ->namespace('Guest')
 ->group(function(){
-    Route::resource('dish', 'DischController')->only('show');
+    Route::resource('user', 'UserController')->only('show');
 });
