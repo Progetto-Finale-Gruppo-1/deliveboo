@@ -37,4 +37,11 @@ Route::prefix('guest')
 ->namespace('Guest')
 ->group(function(){
     Route::resource('user', 'UserController')->only('show');
+    
 });
+
+// prova carrello
+Route::get('store', 'Guest\StoreController@index');
+Route::post('store/add-to-cart', 'Guest\StoreController@addToCart');
+
+Route::get('cart', 'Guest\CartController@index');
