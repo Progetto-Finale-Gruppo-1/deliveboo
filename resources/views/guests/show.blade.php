@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>Ristorante: {{$user->name}}</h2>
-    <menu-component :dato="{{ $dishes }}"></menu-component>
+    <show-component :dato="{{ $dishes }}"></show-component>
 @endsection
 
 @section('script')
