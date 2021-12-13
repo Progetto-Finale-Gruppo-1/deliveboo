@@ -34,7 +34,9 @@ Route::prefix('admin')
 
 
 Route::prefix('guest')
+
 ->namespace('Guest')
 ->group(function(){
     Route::resource('user', 'UserController')->only('show');
+    Route::get('/cart', 'CartController@cart')->name('cart');
 });

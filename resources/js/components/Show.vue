@@ -1,8 +1,8 @@
 <template>
-  <div>
-      <h2>Titolo randomico</h2>
-      <p>Informazione passata tramite Prop: {{dato}}</p>
-  </div>
+    <div>
+        <h2>Titolo randomico</h2>
+        <p>Informazione passata tramite Prop: {{dato}}</p>
+    </div>
 </template>
 
 <script>
