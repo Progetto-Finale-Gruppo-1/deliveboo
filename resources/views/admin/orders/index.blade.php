@@ -4,6 +4,8 @@
     <div class="container">
         <div class="row">
 
+            <a class="btn btn-secondary mb-3" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
+
             <table class="table">
             
                 <thead>
@@ -17,6 +19,7 @@
                 </thead>
                 
                 <tbody>
+                    
                     @forelse ($orders as $order)
                         <tr>
                             <th scope="row">{{$order->id}}</th>
