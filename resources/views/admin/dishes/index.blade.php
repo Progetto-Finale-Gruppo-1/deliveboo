@@ -29,7 +29,7 @@
             <tbody>
                 @forelse ($dishes as $dish)
                     <tr>
-                        <th scope="row"><h3>Nome piatto: {{ $dish->name }}</h3></th>
+                        <th scope="row"><a href="{{ route('admin.dishes.show', $dish->id)}}"><h3>Nome piatto: {{ $dish->name }}</h3></a></th>
                         <th scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
                         <td><a class="btn btn-primary" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
                         <td>
