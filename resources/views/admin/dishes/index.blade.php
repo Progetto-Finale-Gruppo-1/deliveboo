@@ -13,6 +13,9 @@
 
         <a class="btn btn-secondary mb-3" href="{{ route('admin.dishes.create') }}">crea un nuovo piatto</a>
         
+        <a class="btn btn-secondary mb-3" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
+        
+        
         <h2>Lista Piatti</h2>
         
         <table class="table">
@@ -46,6 +49,7 @@
                         <td colspan="3">Non ci sono piatti disponibili</td>
                     </tr>
                 @endforelse ($dishes as $dish)
+
 
             </tbody>
         </table>
