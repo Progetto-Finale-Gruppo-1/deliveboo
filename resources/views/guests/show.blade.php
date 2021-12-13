@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <show-component :dato="{{$user->id}}"></show-component>
+    <h2>Ristorante: {{$user->name}}</h2>
+    <show-component :dato="{{ $dishes }}"></show-component>
 @endsection
 
 @section('script')
