@@ -2,18 +2,55 @@
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+// $font-family-sans-serif: 'Nunito', sans-serif;
+
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+// palette
+$primC: #e64c42;
+$secC: #d8a741;
+$thirC: #414133;
+
+// buttons
+.prim-butt{
+    font-size: 1.2em;
+    padding: 15px 30px 15px 30px;
+    color: white;
+    background-color: $primC;
+    border: 1px solid $primC;
+    border-radius: 10px;
+    text-decoration: none;
+    &:hover{
+        color: $primC;
+        background-color: white;
+        border: 1px solid $primC;
+    }    
+}
+
+.sec-butt{
+    font-size: 1.2em;
+    padding: 15px 30px 15px 30px;
+    color: white;
+    background-color: $secC;
+    border: 1px solid $secC;
+    border-radius: 10px;
+    text-decoration: none;
+    &:hover{
+        color: $secC;
+        background-color: white;
+        border: 1px solid $secC;
+    }    
+}
+
+.white-butt{
+    font-size: 1.2em;
+    font-weight: 200;
+    font-style: italic;
+    padding: 10px 15px 10px 20px;
+    color: black;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
