@@ -1,6 +1,10 @@
 <template>
 
     <div class="container">
+        <div class="row">
+            <!-- Valore passato tramite Prop -->
+            <p>info dal blade: {{dato}}</p>
+        </div>
         <input type="text" v-model="selected.query">
         <div v-for="type in types" :key="type.id" class="d-inline mx-2 input">
             <input type="checkbox" :id="`input${type.id}`" :value="type.name" v-model="selected.checked">
@@ -36,6 +40,7 @@
 
 export default {
     name: 'App',
+    props:['dato'],
     data(){
         return{
             users: [],          // array degli user

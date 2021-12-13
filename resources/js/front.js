@@ -1,12 +1,9 @@
-require ("./bootstrap");
-
 window.Vue = require('vue');
 window.axios = require('axios');
 
-import App from "./components/App.vue";
-
+Vue.component('show-component', require('./components/Show.vue').default);
+Vue.component('app-component', require('./components/App.vue').default);
 
 const app = new Vue({
-    el: '#root',
-    render: h=>h(App)
+    el: '#app',
 });

@@ -2,7 +2,9 @@
 
 
 @section('content')
-    <div id="root"></div>
+        <app-component dato="informazione" ></app-component>
+@endsection
+
+@section('script')    
     <script src="{{ asset('js/front.js')}}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
 @endsection
