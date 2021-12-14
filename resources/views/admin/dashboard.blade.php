@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container container-dashboard">
     <!-- Contenitore generale contenuti -->
     <div class="row justify-content-center">
         <div class="col-lg-12">

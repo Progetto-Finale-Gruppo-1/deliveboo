@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container"> 
+    <div class="container container-dishes-index"> 
 
         @if (session('message'))
             <div class="alert alert-success">

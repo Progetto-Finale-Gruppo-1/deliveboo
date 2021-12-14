@@ -5,6 +5,7 @@
 @import 'variables';
 @import 'dashboard';
 @import 'footer';
+@import 'dishes';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -27,4 +28,15 @@ nav{
     #navbarDropdown{
         color: white;
     }
+    .nav-link{
+        text-decoration: none;
+        color: white;
+        font-size: 1.3em;
+        font-style: italic;
+        &:hover{
+            color: silver;
+        }
+    }
 }
+
+
