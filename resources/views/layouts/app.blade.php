@@ -21,10 +21,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md  shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    DeliveBoo   
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -53,9 +53,11 @@
                                 </li>
                             @endif
                         @else
-                            {{-- <li>
-                                <a href="{{ route('admin')}}">Dashboard</a>
-                            </li> --}}
+
+                            <li>
+                                <a class="nav-link mr-4" href="{{ route('admin.dashboard') }}">Menù Personale</a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -63,8 +65,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -82,6 +84,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="footer p-4">
+            <p class="text-center">© 2021 DeliveBoo ITA, Inc. All rights reserved.</p>
+        </footer>
     </div>
     
     @yield('script')
