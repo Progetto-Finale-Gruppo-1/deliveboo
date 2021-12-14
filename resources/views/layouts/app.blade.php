@@ -84,12 +84,10 @@
         <main class="py-4">
             @yield('content')
         </main>
-
-        <footer class="footer p-4">
-            <p class="text-center">© 2021 DeliveBoo ITA, Inc. All rights reserved.</p>
-        </footer>
     </div>
-    
+    <footer class="footer p-4">
+        <p class="text-center">© 2021 DeliveBoo ITA, Inc. All rights reserved.</p>
+    </footer>
     @yield('script')
 </body>
 </html>
