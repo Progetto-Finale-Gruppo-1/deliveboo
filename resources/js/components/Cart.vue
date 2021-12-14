@@ -5,23 +5,26 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Prodotto</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Quantità</th>
-                    <th scope="col">Rimuovi</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item, i in cartItems" :key="i">
-                    <th scope="col"><input type="checkbox" v-model="check" @change="selection(check, item)"></th>
+                <tr v-for="item, i in cartItems.menu" :key="i">
+                    <th scope="col">
+                        <input type="checkbox" @change="selection(item)" @click="item.check =! item.check">
+                    </th>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.price }}</td>
+                    <td>{{ item.price }}€</td>
                     <td>
-                        <button class="mx-2" @click="add(item)">+</button>
+                        <button class="mx-2 p-2 btn btn-primary" @click="pick(item)">-</button>
 
                         {{ item.quantity }}
 
-                        <button class="mx-2" @click="pick(item)">-</button></td>
+                        <button class="mx-2 p-2 btn btn-primary" @click="add(item)">+</button>
+                    </td>
                     <td><button class="btn btn-danger" @click="remove(item)">Remove</button></td>
                 </tr>
                 </tbody>
@@ -35,7 +38,6 @@
 export default {
     data(){
         return{
-            check: false,
             cartItems: [],
             orderItem: [],
             STORAGE_KEY: 'cart_items',
@@ -54,20 +56,25 @@ export default {
         },
 
         pick(item){
-            if(item.quantity > 0) item.quantity--
+            if(item.quantity > 1) item.quantity--
         },
 
         remove(item){
-            this.cartItems.splice(this.cartItems.indexOf(item), 1)
+            this.cartItems.menu.splice(this.cartItems.menu.indexOf(item), 1)
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartItems))
         },
 
         confirmOrder(){
-            if(this.check) localStorage.setItem(this.STORAGE_KEY_CONFIRM, JSON.stringify(this.orderItem))
+            if(this.orderItem.length == 0){
+                alert('inserischi')
+            }else{
+                localStorage.setItem(this.STORAGE_KEY_CONFIRM, JSON.stringify(this.orderItem))
+            }
         },
 
-        selection(check, item){
-            if(check) {
+        selection(item){
+
+            if(item.check) {
                 this.orderItem.push(item)
             }else{
                 this.orderItem.splice(this.orderItem.indexOf(item), 1)
