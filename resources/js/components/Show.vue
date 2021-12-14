@@ -88,6 +88,7 @@ export default {
                     if(confirm){
                         this.removeItems();    
                         items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
+                        change = true;
                     }
                 }                
             }else {
