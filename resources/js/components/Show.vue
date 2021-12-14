@@ -23,18 +23,17 @@
             </div>
             
             <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
-                <!-- <form @submit.prevent="setItems(piatto)">
-                    <div>
+                <form @submit.prevent="setItems(piatto)">
+                    <!-- <div>
                         <input v-model.number="quantity" type="number" >
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-secondary">Add 1 to Cart</button>
-                </form> -->
+                </form>
 
                 <!-- <div>
                     <input type="number" :name="'quantity'+piatto.id" value="1" min="1">
                 </div> -->
-                <button @click="setItems(piatto)" class="btn btn-secondary">Add 1 to Cart</button>
-                <button @click="delItems(piatto.id)" class="btn btn-warning">Remove from Cart</button>
+                <button @click="delItems(piatto.user_id, piatto.id)" class="btn btn-warning">Remove from Cart</button>
             </div>
         </div>
     </div>
@@ -56,37 +55,47 @@ export default {
     methods: {
         setItems (piatto) {
             // console.log(document.querySelector(`input[name = 'quantity${piatto.id}']`));
-            let change = false;
-            // console.log(piatto);
             
+            let change = false;
             let items = {};
+            
+            // Verifica che ci siano dati nel localStorage e quindi sia già presente una selezione di piatti
             if(localStorage.getItem(this.storage_key)) {
                 items = this.getItems();
-                console.log(items.menu);
-                console.log(items);
 
-                // Controlla se il piatto è già presente nella lista del localStorage
-                const index = items.menu.findIndex(el => el.id === piatto.id)
-                console.log(index);
+                // Verifica che il ristorante all'interno del localStorage sia lo stesso dell'evento
+                if (this.verifyRestaurant(items.restaurant, piatto.user_id))
+                {
+                    // Controlla se il piatto è già presente nella lista del localStorage
+                    const index = items.menu.findIndex(el => el.id === piatto.id)
 
-                // Se il piatto è presente allora aggiunge 1 alla quantità
-                if (index >= 0) {
-                    console.log('i piatti corrispondono');
-                    change = true;
-                    items.menu[index].quantity++;
-                
-                // Altrimenti aggiunge il piatto nella lista come nuovo piatto
+                    // Se il piatto è presente allora aggiunge 1 alla quantità
+                    if (index >= 0) {
+                        console.log('i piatti corrispondono');
+                        change = true;
+                        items.menu[index].quantity++;
+                    
+                    // Altrimenti aggiunge il piatto nella lista come nuovo piatto
+                    }else {
+                        items.menu.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check: false});
+                        change = true;
+                    }
                 }else {
-                    items.menu.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check: false});
-                    change = true;
-                }
+                    // Altrimenti il ristorante non è lo stesso, e viene richiesta la conferma per la cancellazione del carrello
+                    const confirm = window.confirm('Non puoi aggiungere piatti al carrello di un altro ristorante');
+                    console.log(confirm);
+                    // Se la conferma è positiva restituisce -true- e rimuoviamo tutte le informazioni dal localStorage e poi aggiungiamo il piatto selezionato
+                    if(confirm){
+                        this.removeItems();    
+                        items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
+                    }
+                }                
             }else {
+                // Altrimenti se non è presente nessuna informazione nel localStorage, aggiunge direttamente il piatto come del ristorante
                 change = true;
                 items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
             }
 
-            console.log('fuori');
-            console.log(items);
             if(change)
             {                
                 localStorage.setItem(this.storage_key, JSON.stringify(items));
@@ -96,25 +105,39 @@ export default {
         getItems () {
             return JSON.parse(localStorage.getItem(this.storage_key));
         },
+
+        /**
+         * Verifica che il ristorante sia quello selezionato
+         * Restituendo vero o falso;
+         */
+        verifyRestaurant (restaurant_id, user_id) {
+            if(restaurant_id === user_id) return true;
+            return false;
+        },
         
-        delItems (id) {
-            let change = false;
-            let items = [];
+        /**
+         * Rimuove solo un piatto dalla lista, verificando prima di essere nel ristorante corretto
+         */
+        delItems (user_id, dish_id) {
+            let items = {};
             if(localStorage.getItem(this.storage_key)) {
                 items = this.getItems();
-                const index = items.findIndex(el => el.id === id)
-                if(index >= 0)
+                if(this.verifyRestaurant(items.restaurant, user_id))
                 {
-                    change = true;
-                    items.splice(index, 1);
+                    const index = items.menu.findIndex(el => el.id === dish_id)
+                    if(index >= 0)
+                    {
+                        items.menu.splice(index, 1);                        
+                        localStorage.setItem(this.storage_key, JSON.stringify(items));
+                        console.log(items.menu.length);
+                        this.cartEmpty(items.menu.length);                    }
                 }
-
             }
+        },
 
-            if(change)
-            {                
-                localStorage.setItem(this.storage_key, JSON.stringify(items));
-            }
+        // Verifica un intero che corrisponde alla lunghezza della lista menu, se è minore od uguale a zero allora cancella tutto l'item dal localStorage
+        cartEmpty (menuLeft) {
+            if (menuLeft <= 0) this.removeItems();
         },
 
         removeItems () {
