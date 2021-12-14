@@ -22,9 +22,16 @@
                 </div> 
             </div>
             
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
+                <!-- <form @submit.prevent="setItems(piatto)">
+                    <div>
+                        <input v-model.number="quantity" type="number" >
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add 1 to Cart</button>
+                </form> -->
+
                 <!-- <div>
-                    <input type="number" name="quantity" value="1" min="1">
+                    <input type="number" :name="'quantity'+piatto.id" value="1" min="1">
                 </div> -->
                 <button @click="setItems(piatto)" class="btn btn-secondary">Add 1 to Cart</button>
                 <button @click="delItems(piatto.id)" class="btn btn-warning">Remove from Cart</button>
@@ -42,38 +49,40 @@ export default {
     data(){
         return {            
             storage_key: 'cart_items',
-            
+            storageItems: [],
         }
     },
 
     methods: {
         setItems (piatto) {
+            // console.log(document.querySelector(`input[name = 'quantity${piatto.id}']`));
             let change = false;
-            console.log(piatto);
+            // console.log(piatto);
             
-            let items = [];
+            let items = {};
             if(localStorage.getItem(this.storage_key)) {
                 items = this.getItems();
+                console.log(items.menu);
                 console.log(items);
 
                 // Controlla se il piatto è già presente nella lista del localStorage
-                const index = items.findIndex(el => el.id === piatto.id)
+                const index = items.menu.findIndex(el => el.id === piatto.id)
                 console.log(index);
 
                 // Se il piatto è presente allora aggiunge 1 alla quantità
                 if (index >= 0) {
                     console.log('i piatti corrispondono');
                     change = true;
-                    items[index].quantity++;
+                    items.menu[index].quantity++;
                 
                 // Altrimenti aggiunge il piatto nella lista come nuovo piatto
                 }else {
-                    items.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1});
+                    items.menu.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check: false});
                     change = true;
                 }
             }else {
                 change = true;
-                items.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1});
+                items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
             }
 
             console.log('fuori');
@@ -114,8 +123,10 @@ export default {
     },
 
     mounted() {
-        console.log(this.dato);
-        console.log(typeof this.dato);
+        // this.storageItems = this.getItems();
+        // console.log(this.storageItems);
+        // console.log(this.dato);
+        // console.log(typeof this.dato);
     }
 }
 </script>
