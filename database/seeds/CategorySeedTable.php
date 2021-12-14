@@ -2,7 +2,6 @@
 
 use App\Models\Category;
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 
 class CategorySeedTable extends Seeder
 {
@@ -11,13 +10,17 @@ class CategorySeedTable extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for($i=0;$i<8;$i++){
+        $categories = ['Hotel','Bar','Ristorante','Paninoteca','Osteria','Rosticeria'];
 
+        foreach($categories as $cat){
             $category = new Category();
-            $category->name = $faker->name();
+            $category->name = $cat;
             $category->save();
         }
+
+
+        
     }
 }

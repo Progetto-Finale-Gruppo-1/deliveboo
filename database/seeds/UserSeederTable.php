@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Category;
 use App\User;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Arr;
 
 class UserSeederTable extends Seeder
 {
@@ -13,11 +15,16 @@ class UserSeederTable extends Seeder
      */
     public function run(Faker $faker)
     {
+
+        $categories_ids = Category::pluck('id')->toArray();
+
+
         $newUser = new User();
         $newUser->name = 'user prova';
         $newUser->email = 'emaildiprova@gmail.com';
         $newUser->password = bcrypt('ciao1234');
         $newUser->iva = $faker->numerify('###########');
+        $newUser->category_id = Arr::random($categories_ids);
         $newUser->address = $faker->streetName();
         $newUser->city = $faker->city();
         $newUser->zip_code = $faker->numerify('#####');
@@ -36,6 +43,7 @@ class UserSeederTable extends Seeder
             $user->name = $faker->name();
             $user->email = $faker->email();
             $user->password = bcrypt($faker->password());
+            $user->category_id = Arr::random($categories_ids);
             $user->iva = $faker->numerify('###########');
             $user->address = $faker->streetName();
             $user->city = $faker->city();

@@ -41,7 +41,8 @@
         </div>
 
         <div class="form-check mb-5 avaliable">
-            <input class="form-check-input" type="checkbox" value="0" id="available" name="available">
+            <input @if(request()->routeIs('admin.dishes.edit') && $dish->available == 1) checked @endif 
+            checked class="form-check-input" type="checkbox" value="{{ request()->routeIs('admin.dishes.edit') ? $dish->available : '' }}" id="available" name="available">
             <label class="form-check-label" for="available"> Available </label>
         </div>
 

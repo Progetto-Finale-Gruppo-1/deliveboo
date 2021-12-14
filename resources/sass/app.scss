@@ -16,7 +16,9 @@
     margin: 0;
     font-family: 'Lato', sans-serif;
 }
-
+#app{
+    min-height: 100vh;
+}
 nav{
     background-color: $primC;
     .navbar-brand{
