@@ -22,10 +22,17 @@
                 </div> 
             </div>
             
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
+                <!-- <form @submit.prevent="setItems(piatto)">
+                    <div>
+                        <input v-model.number="quantity" type="number" >
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add 1 to Cart</button>
+                </form> -->
+
+                <!-- <div>
                     <input type="number" :name="'quantity'+piatto.id" value="1" min="1">
-                </div>
+                </div> -->
                 <button @click="setItems(piatto)" class="btn btn-secondary">Add 1 to Cart</button>
                 <button @click="delItems(piatto.id)" class="btn btn-warning">Remove from Cart</button>
             </div>
@@ -48,13 +55,14 @@ export default {
 
     methods: {
         setItems (piatto) {
-            console.log(document.querySelector(`input[name = 'quantity${piatto.id}']`));
+            // console.log(document.querySelector(`input[name = 'quantity${piatto.id}']`));
             let change = false;
-            console.log(piatto);
+            // console.log(piatto);
             
-            let items = [];
+            let items = {};
             if(localStorage.getItem(this.storage_key)) {
                 items = this.getItems();
+                console.log(items.menu);
                 console.log(items);
 
                 // Controlla se il piatto è già presente nella lista del localStorage
@@ -69,12 +77,12 @@ export default {
                 
                 // Altrimenti aggiunge il piatto nella lista come nuovo piatto
                 }else {
-                    items.menu.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1});
+                    items.menu.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check: false});
                     change = true;
                 }
             }else {
                 change = true;
-                items.push({restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1}]});
+                items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
             }
 
             console.log('fuori');
