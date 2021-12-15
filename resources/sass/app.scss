@@ -7,6 +7,7 @@
 @import 'footer';
 @import 'dishes';
 
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -21,6 +22,9 @@
 }
 nav{
     background-color: $primC;
+    .row{
+        width: 100%;
+    }
     .navbar-brand{
         color: white;
         font-size: 2.5em;
