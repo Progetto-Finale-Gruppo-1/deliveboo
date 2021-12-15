@@ -1,59 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="index-wrapper container p-5 mt-4">
+        
+        <div class="container container-dishes-index"> 
 
-    <div class="container container-dishes-index"> 
-
-        @if (session('message'))
-            <div class="alert alert-success">
-                {{session('message')}}
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{session('message')}}
+                    
+                </div>
+            @endif
+            
+            <a class="btn white-butt-hover white col-lg-2 col-12 col-md-3 mb-4" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
+            
+            <h2 class="mb-5">Lista Piatti</h2>
+            
+            <a class="btn prim-butt rosso col-12 col-lg-4" href="{{ route('admin.dishes.create') }}">crea un nuovo piatto</a>
+            
+            <table class="table mt-5">
                 
-            </div>
-        @endif
-
-        <a class="btn btn-secondary mb-3" href="{{ route('admin.dishes.create') }}">crea un nuovo piatto</a>
-        
-        <a class="btn btn-secondary mb-3" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
-        
-        
-        <h2>Lista Piatti</h2>
-        
-        <table class="table">
-            
-            <thead>
-            <tr>
-                <th scope="col">Nome del piatto</th>
-                <th scope="col">Disponibilità</th>
-                <th scope="col">Modifica</th>
-                <th scope="col">Elimina</th>
-            </tr>
-            </thead>
-            
-            <tbody>
-                @forelse ($dishes as $dish)
-                    <tr>
-                        <th scope="row"><a href="{{ route('admin.dishes.show', $dish->id)}}"><h3>Nome piatto: {{ $dish->name }}</h3></a></th>
-                        <th scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
-                        <td><a class="btn btn-primary" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
-                        <td>
-                            
-                            <form action="{{ route('admin.dishes.destroy', $dish->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3">Non ci sono piatti disponibili</td>
-                    </tr>
-                @endforelse ($dishes as $dish)
+                <thead>
+                <tr>
+                    <th scope="col-4">Nome del piatto</th>
+                    <th scope="col-4">Disponibilità</th>
+                    <th scope="col-2">Modifica</th>
+                    <th scope="col-2">Elimina</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                    @forelse ($dishes as $dish)
+                        <tr>
+                            <th scope="row"><a href="{{ route('admin.dishes.show', $dish->id)}}"><h3>{{ $dish->name }}</h3></a></th>
+                            <th scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
+                            <td><a class="btn white-butt-hover yell" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
+                            <td>
+                                
+                                <form action="{{ route('admin.dishes.destroy', $dish->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn white-butt-hover">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3">Non ci sono piatti disponibili</td>
+                        </tr>
+                    @endforelse ($dishes as $dish)
 
 
-            </tbody>
-        </table>
-    
+                </tbody>
+            </table>
+        
+        </div>
+
     </div>
     
     

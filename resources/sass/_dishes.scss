@@ -1,0 +1,46 @@
+
+.index-wrapper{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border-radius: 30px;
+    .container-dishes-index{
+        .prim-butt.rosso{
+            background-color: $primC;
+            color: white;
+            border: 1px solid $primC;
+        }
+        .white-butt-hover.white{
+            background-color: $secC;
+            color: white;
+        }
+        h2{
+            font-size: 4em;
+            font-style: italic;
+        }
+        tbody{
+            font-style: italic;
+            font-weight: 200;
+            tr{
+                th{
+                    a{
+                        color: black;
+                        text-decoration: none;
+                        h3{
+    
+                        }&:hover{
+                            color: $primC;
+                        }
+                    }
+                }
+                .white-butt-hover{
+                    background-color: $primC;
+                    color: white;
+                }
+    
+                .white-butt-hover.yell{
+                    background-color: $secC;
+                    color: white;
+                }
+            }
+        }
+    }
+}
