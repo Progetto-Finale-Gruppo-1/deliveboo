@@ -39,4 +39,7 @@ Route::prefix('guest')
 ->group(function(){
     Route::resource('user', 'UserController')->only('show');
     Route::get('/cart', 'CartController@cart')->name('cart');
+    
+    Route::get('/payment', 'PaymentController@index')->name('payment.index');
+    Route::post('/payment', 'PaymentController@checkout')->name('payment.checkout');;
 });
