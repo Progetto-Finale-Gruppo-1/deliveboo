@@ -12,7 +12,7 @@ class TypeSeederTable extends Seeder
      */
     public function run()
     {
-        $types = ['Cinese', 'Mexican', 'Tex-Mex', 'Italian', 'Churascaria', 'Hamburgheria'];
+        $types = ['Cinese', 'Mexican', 'Tex-Mex', 'Italian', 'Churascaria', 'Hamburgheria', 'Pesce'];
 
         foreach($types as $type){
 

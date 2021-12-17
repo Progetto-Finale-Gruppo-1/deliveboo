@@ -15,44 +15,70 @@ class UserSeederTable extends Seeder
      */
     public function run(Faker $faker)
     {
+        $restaurants = [
+            [
+                'name' => 'Carpe Diem',
+                'email'=> $faker->email(),
+                'password'=> bcrypt($faker->password()),
+                'iva' => '9876543218',
+                'address'=> 'Via Lazzaro Papi, 5',
+                'city'=> 'Milano',
+                'zip_code'=> '20068',
+                'phone'=> '333132312',
+                'image'=> 'https://media-cdn.tripadvisor.com/media/photo-s/15/29/39/c5/carpe-diem.jpg',
+                'description'=> $faker->text(100)
+            ],
+            [
+                'name' => 'Ginza',
+                'email'=> $faker->email(),
+                'password'=> bcrypt($faker->password()),
+                'iva' => '9876521857',
+                'address'=> 'Via Roma, 3',
+                'city'=> 'Milano',
+                'zip_code'=> '20068',
+                'phone'=> '333132334',
+                'image'=> 'https://www.ristoranteginza.com/wp-content/uploads/2019/04/ristorante-2.jpg',
+                'description'=> $faker->text(100)
+            ],
+            [
+                'name' => 'Il Casale Ristorante',
+                'email'=> $faker->email(),
+                'password'=> bcrypt($faker->password()),
+                'iva' => '9876123857',
+                'address'=> 'Via Pescara, 3',
+                'city'=> 'Milano',
+                'zip_code'=> '20068',
+                'phone'=> '333131111',
+                'image'=> 'img/ristoranti/il-casale-ristorante-pizzeria.jpg',
+                'description'=> $faker->text(100)
+            ],
+        ];
 
         $categories_ids = Category::pluck('id')->toArray();
 
-
-        $newUser = new User();
-        $newUser->name = 'user prova';
-        $newUser->email = 'emaildiprova@gmail.com';
-        $newUser->password = bcrypt('ciao1234');
-        $newUser->iva = $faker->numerify('###########');
-        $newUser->category_id = Arr::random($categories_ids);
-        $newUser->address = $faker->streetName();
-        $newUser->city = $faker->city();
-        $newUser->zip_code = $faker->numerify('#####');
-        $newUser->phone = $faker->numerify('#############');
-        $newUser->image = 'https://via.placeholder.com/1280x720.png?text=Nome+Del+Ristorante';
-        $newUser->description = $faker->text(100);
-
-        $newUser->save();
     
 
-        for($i=0;$i<27;$i++){
-        
-
+        foreach($restaurants as $restaurant){
+            for($i=0; $i<20; $i++){
             $user = new User();
 
-            $user->name = $faker->name();
+
+            $user->name = $restaurant['name'].$i;
             $user->email = $faker->email();
-            $user->password = bcrypt($faker->password());
+            $user->password = $restaurant['password'];
             $user->category_id = Arr::random($categories_ids);
             $user->iva = $faker->numerify('###########');
-            $user->address = $faker->streetName();
-            $user->city = $faker->city();
-            $user->zip_code = $faker->numerify('#####');
-            $user->phone = $faker->numerify('#############');
-            $user->image = 'https://via.placeholder.com/1280x720.png?text=Nome+Del+Ristorante';
+            $user->address = $restaurant['address'];
+            $user->city = $restaurant['city'];
+            $user->zip_code = $restaurant['zip_code'];
+            $user->phone = $faker->numerify('##########');;
+            $user->image = $restaurant['image'];
             $user->description = $faker->text(100);
 
             $user->save();
+            
+            };
+
         }
     }
 }
