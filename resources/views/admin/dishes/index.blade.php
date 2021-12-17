@@ -16,7 +16,7 @@
             
             <h2 class="mb-5">Lista Piatti</h2>
             
-            <a class="btn prim-butt rosso col-12 col-lg-4" href="{{ route('admin.dishes.create') }}">crea un nuovo piatto</a>
+            <a class="prim-butt col-12 col-lg-4" href="{{ route('admin.dishes.create') }}">crea un nuovo piatto</a>
             
             <table class="table mt-5">
                 
@@ -31,16 +31,16 @@
                 
                 <tbody>
                     @forelse ($dishes as $dish)
-                        <tr>
-                            <th scope="row"><a href="{{ route('admin.dishes.show', $dish->id)}}"><h3>{{ $dish->name }}</h3></a></th>
-                            <th scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
-                            <td><a class="btn white-butt-hover yell" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
+                        <tr >
+                            <th class="align-bottom" scope="row"><a href="{{ route('admin.dishes.show', $dish->id)}}"><h3>{{ $dish->name }}</h3></a></th>
+                            <th class="align-bottom" scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
+                            <td class="align-middle"><a class="sec-butt" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
                             <td>
                                 
                                 <form action="{{ route('admin.dishes.destroy', $dish->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn white-butt-hover">Delete</button>
+                                    <button type="submit" class="prim-butt">Delete</button>
                                 </form>
                             </td>
                         </tr>
