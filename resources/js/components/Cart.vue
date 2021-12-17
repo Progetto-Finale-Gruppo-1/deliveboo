@@ -4,86 +4,113 @@
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Edit</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item, i in cartItems.menu" :key="i">
-                    <th scope="col">
-                        <input type="checkbox" @change="selection(item)" @click="item.check =! item.check">
-                    </th>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.price }}€</td>
-                    <td>
-                        <button class="mx-2 p-2 btn btn-primary" @click="pick(item)">-</button>
+                    <tr v-for="(item, i) in cartItems.menu" :key="i">
+                        <th scope="col">
+                            <input
+                                type="checkbox"
+                                @change="selection(item)"
+                                @click="item.check = !item.check"
+                            />
+                        </th>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }}€</td>
+                        <td>
+                            <button
+                                class="mx-2 p-2 btn btn-primary"
+                                @click="pick(item)"
+                            >
+                                -
+                            </button>
 
-                        {{ item.quantity }}
+                            {{ item.quantity }}
 
-                        <button class="mx-2 p-2 btn btn-primary" @click="add(item)">+</button>
-                    </td>
-                    <td><button class="btn btn-danger" @click="remove(item)">Remove</button></td>
-                </tr>
+                            <button
+                                class="mx-2 p-2 btn btn-primary"
+                                @click="add(item)"
+                            >
+                                +
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                class="btn btn-danger"
+                                @click="remove(item)"
+                            >
+                                Remove
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            <button class="btn btn-success" @click="confirmOrder">Confirm Order</button>
+            <button class="btn btn-success" @click="confirmOrder">
+                Confirm Order
+            </button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
+    data() {
+        return {
             cartItems: [],
             orderItem: [],
-            STORAGE_KEY: 'cart_items',
-            STORAGE_KEY_CONFIRM: 'cart_confirm',
-        }
+            STORAGE_KEY: "cart_items",
+            STORAGE_KEY_CONFIRM: "cart_confirm",
+        };
     },
 
-    created(){
-        this.cartItems = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '[]' )
+    created() {
+        this.cartItems = JSON.parse(
+            localStorage.getItem(this.STORAGE_KEY) || "[]"
+        );
     },
 
-    methods:{
-
-        add(item){
-            item.quantity++
+    methods: {
+        add(item) {
+            item.quantity++;
         },
 
-        pick(item){
-            if(item.quantity > 1) item.quantity--
+        pick(item) {
+            if (item.quantity > 1) item.quantity--;
         },
 
-        remove(item){
-            this.cartItems.menu.splice(this.cartItems.menu.indexOf(item), 1)
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartItems))
+        remove(item) {
+            this.cartItems.menu.splice(this.cartItems.menu.indexOf(item), 1);
+            localStorage.setItem(
+                this.STORAGE_KEY,
+                JSON.stringify(this.cartItems)
+            );
         },
 
-        confirmOrder(){
-            if(this.orderItem.length == 0){
-                alert('inserischi')
-            }else{
-                localStorage.setItem(this.STORAGE_KEY_CONFIRM, JSON.stringify(this.orderItem))
+        confirmOrder() {
+            if (this.orderItem.length == 0) {
+                alert("inserischi");
+            } else {
+                localStorage.setItem(
+                    this.STORAGE_KEY_CONFIRM,
+                    JSON.stringify(this.orderItem)
+                );
             }
         },
 
-        selection(item){
-
-            if(item.check) {
-                this.orderItem.push(item)
-            }else{
-                this.orderItem.splice(this.orderItem.indexOf(item), 1)
+        selection(item) {
+            if (item.check) {
+                this.orderItem.push(item);
+            } else {
+                this.orderItem.splice(this.orderItem.indexOf(item), 1);
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

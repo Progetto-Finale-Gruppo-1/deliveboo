@@ -1,39 +1,56 @@
 <template>
     <div class="container">
-
         <div class="mb-3">
             <!-- Remove per pulizia in produzione -->
-            <button @click="removeItems()" class="btn btn-warning">Remove items</button>
+            <button @click="removeItems()" class="btn btn-warning">
+                Remove items
+            </button>
         </div>
         <div v-for="piatto in dato" :key="piatto.id" class="row">
-            
             <div class="card col-10 mb-3">
                 <div class="row">
-                    <div class="col-4">                        
-                        <img :src="piatto.image" class="img-fluid rounded-start" alt="...">
+                    <div class="col-4">
+                        <img
+                            :src="piatto.image"
+                            class="img-fluid rounded-start"
+                            alt="..."
+                        />
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{piatto.name}}</h5>
-                            <p class="card-text">{{piatto.description}}</p>
-                            <p class="card-text"><span class="text-white bg-danger">{{piatto.price}}€</span></p>
+                            <h5 class="card-title">{{ piatto.name }}</h5>
+                            <p class="card-text">{{ piatto.description }}</p>
+                            <p class="card-text">
+                                <span class="text-white bg-danger"
+                                    >{{ piatto.price }}€</span
+                                >
+                            </p>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
-            
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
+
+            <div
+                class="col-2 d-flex flex-column justify-content-center align-items-center"
+            >
                 <form @submit.prevent="setItems(piatto)">
                     <!-- <div>
                         <input v-model.number="quantity" type="number" >
                     </div> -->
-                    <button type="submit" class="btn btn-secondary">Add 1 to Cart</button>
+                    <button type="submit" class="btn btn-secondary">
+                        Add 1 to Cart
+                    </button>
                 </form>
 
                 <!-- <div>
                     <input type="number" :name="'quantity'+piatto.id" value="1" min="1">
                 </div> -->
-                <button @click="delItems(piatto.user_id, piatto.id)" class="btn btn-warning">Remove from Cart</button>
+                <button
+                    @click="delItems(piatto.user_id, piatto.id)"
+                    class="btn btn-warning"
+                >
+                    Remove from Cart
+                </button>
             </div>
         </div>
     </div>
@@ -41,69 +58,99 @@
 
 <script>
 export default {
-    name: 'Show',
+    name: "Show",
     props: {
-        dato : Array,
+        dato: Array,
     },
-    data(){
-        return {            
-            storage_key: 'cart_items',
+    data() {
+        return {
+            storage_key: "cart_items",
             storageItems: [],
-        }
+        };
     },
 
     methods: {
-        setItems (piatto) {
+        setItems(piatto) {
             // console.log(document.querySelector(`input[name = 'quantity${piatto.id}']`));
-            
+
             let change = false;
             let items = {};
-            
+
             // Verifica che ci siano dati nel localStorage e quindi sia già presente una selezione di piatti
-            if(localStorage.getItem(this.storage_key)) {
+            if (localStorage.getItem(this.storage_key)) {
                 items = this.getItems();
 
                 // Verifica che il ristorante all'interno del localStorage sia lo stesso dell'evento
-                if (this.verifyRestaurant(items.restaurant, piatto.user_id))
-                {
+                if (this.verifyRestaurant(items.restaurant, piatto.user_id)) {
                     // Controlla se il piatto è già presente nella lista del localStorage
-                    const index = items.menu.findIndex(el => el.id === piatto.id)
+                    const index = items.menu.findIndex(
+                        (el) => el.id === piatto.id
+                    );
 
                     // Se il piatto è presente allora aggiunge 1 alla quantità
                     if (index >= 0) {
-                        console.log('i piatti corrispondono');
+                        console.log("i piatti corrispondono");
                         change = true;
                         items.menu[index].quantity++;
-                    
-                    // Altrimenti aggiunge il piatto nella lista come nuovo piatto
-                    }else {
-                        items.menu.push({ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check: false});
+
+                        // Altrimenti aggiunge il piatto nella lista come nuovo piatto
+                    } else {
+                        items.menu.push({
+                            id: piatto.id,
+                            name: piatto.name,
+                            price: piatto.price,
+                            quantity: 1,
+                            check: false,
+                        });
                         change = true;
                     }
-                }else {
+                } else {
                     // Altrimenti il ristorante non è lo stesso, e viene richiesta la conferma per la cancellazione del carrello
-                    const confirm = window.confirm('Non puoi aggiungere piatti al carrello di un altro ristorante');
+                    const confirm = window.confirm(
+                        "Non puoi aggiungere piatti al carrello di un altro ristorante"
+                    );
                     console.log(confirm);
                     // Se la conferma è positiva restituisce -true- e rimuoviamo tutte le informazioni dal localStorage e poi aggiungiamo il piatto selezionato
-                    if(confirm){
-                        this.removeItems();    
-                        items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
+                    if (confirm) {
+                        this.removeItems();
+                        items = {
+                            restaurant: piatto.user_id,
+                            menu: [
+                                {
+                                    id: piatto.id,
+                                    name: piatto.name,
+                                    price: piatto.price,
+                                    quantity: 1,
+                                    check: false,
+                                },
+                            ],
+                        };
                         change = true;
                     }
-                }                
-            }else {
+                }
+            } else {
                 // Altrimenti se non è presente nessuna informazione nel localStorage, aggiunge direttamente il piatto come del ristorante
                 change = true;
-                items = {restaurant: piatto.user_id, menu: [{ id : piatto.id, name : piatto.name, price : piatto.price, quantity: 1, check : false}]};
+                items = {
+                    restaurant: piatto.user_id,
+                    menu: [
+                        {
+                            id: piatto.id,
+                            name: piatto.name,
+                            price: piatto.price,
+                            quantity: 1,
+                            check: false,
+                        },
+                    ],
+                };
             }
 
-            if(change)
-            {                
+            if (change) {
                 localStorage.setItem(this.storage_key, JSON.stringify(items));
             }
         },
 
-        getItems () {
+        getItems() {
             return JSON.parse(localStorage.getItem(this.storage_key));
         },
 
@@ -111,39 +158,43 @@ export default {
          * Verifica che il ristorante sia quello selezionato
          * Restituendo vero o falso;
          */
-        verifyRestaurant (restaurant_id, user_id) {
-            if(restaurant_id === user_id) return true;
+        verifyRestaurant(restaurant_id, user_id) {
+            if (restaurant_id === user_id) return true;
             return false;
         },
-        
+
         /**
          * Rimuove solo un piatto dalla lista, verificando prima di essere nel ristorante corretto
          */
-        delItems (user_id, dish_id) {
+        delItems(user_id, dish_id) {
             let items = {};
-            if(localStorage.getItem(this.storage_key)) {
+            if (localStorage.getItem(this.storage_key)) {
                 items = this.getItems();
-                if(this.verifyRestaurant(items.restaurant, user_id))
-                {
-                    const index = items.menu.findIndex(el => el.id === dish_id)
-                    if(index >= 0)
-                    {
-                        items.menu.splice(index, 1);                        
-                        localStorage.setItem(this.storage_key, JSON.stringify(items));
+                if (this.verifyRestaurant(items.restaurant, user_id)) {
+                    const index = items.menu.findIndex(
+                        (el) => el.id === dish_id
+                    );
+                    if (index >= 0) {
+                        items.menu.splice(index, 1);
+                        localStorage.setItem(
+                            this.storage_key,
+                            JSON.stringify(items)
+                        );
                         console.log(items.menu.length);
-                        this.cartEmpty(items.menu.length);                    }
+                        this.cartEmpty(items.menu.length);
+                    }
                 }
             }
         },
 
         // Verifica un intero che corrisponde alla lunghezza della lista menu, se è minore od uguale a zero allora cancella tutto l'item dal localStorage
-        cartEmpty (menuLeft) {
+        cartEmpty(menuLeft) {
             if (menuLeft <= 0) this.removeItems();
         },
 
-        removeItems () {
+        removeItems() {
             localStorage.removeItem(this.storage_key);
-        }
+        },
     },
 
     mounted() {
@@ -151,12 +202,12 @@ export default {
         // console.log(this.storageItems);
         // console.log(this.dato);
         // console.log(typeof this.dato);
-    }
-}
+    },
+};
 </script>
 
 <style scoped>
-    input {
-        width: 50px;
-    }
+input {
+    width: 50px;
+}
 </style>
