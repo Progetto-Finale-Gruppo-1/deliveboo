@@ -26,13 +26,13 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label for="types" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Types') }}</label>
 
                             @foreach ($types as $type)
                             <div class="col-1">
                                 <label for="type{{ $type->id }}">{{ $type->name }}</label>
-                                <input id="type{{ $type->id }}" value="{{ $type->id }}" type="checkbox" class="form-control @error('name') is-invalid @enderror" name="type[]" value="{{ old('name') }}">
+                                <input id="type{{ $type->id }}" value="{{ $type->id }}" type="checkbox" class="form-control @error('name') is-invalid @enderror" name="types[]" value="{{ old('name') }}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                             </div>
                             @endforeach
                             
-                        </div> --}}
+                        </div>
 
                         <div class="form-group row">
                             <label for="types" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Category') }}</label>
