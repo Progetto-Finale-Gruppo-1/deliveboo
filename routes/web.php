@@ -40,6 +40,7 @@ Route::prefix('guest')
     Route::resource('user', 'UserController')->only('show');
     Route::get('/cart', 'CartController@cart')->name('cart');
     
+    Route::get('/payment/success', 'PaymentController@done')->name('payment.success');
     Route::get('/payment', 'PaymentController@index')->name('payment.index');
     Route::post('/payment', 'PaymentController@checkout')->name('payment.checkout');;
 });

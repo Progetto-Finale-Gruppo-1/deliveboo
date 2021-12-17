@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class PaymentController extends Controller
 {
-    public function index(){               
+    public function index(){
         $gateway = new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchantId'),
@@ -17,11 +18,12 @@ class PaymentController extends Controller
 
         $token = $gateway->ClientToken()->generate(); 
     
-        return view('guests.payment', compact('token'));
+        return view('guests.hosted', compact('token'));
     }
 
     public function checkout(Request $request){
-                       
+        // Creazione di una validation?
+
         $gateway = new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchantId'),
@@ -44,7 +46,23 @@ class PaymentController extends Controller
         if ($result->success) {
             $transaction = $result->transaction;
             
-            return back()->with('success_message', 'Transaction successful. The ID is: '. $transaction->id);
+            // Creazione di un nuovo ordine con i dati inseriti dall'utente
+            $newOrder = new Order();
+            $newOrder->fill($request->all());
+            $newOrder->save();
+            
+            // Recupero del carrello dal localStorage, sottoforma di array associativo
+            $cart = json_decode($request->infoCart, true);
+            // Suddivisione di ogni piatto del menu
+            $listDishesOrdered = array_slice($cart['menu'], 0);
+            
+            // Collegamento dell'ordine con i piatti aquistati
+            foreach($listDishesOrdered as $order)
+            {
+                $newOrder->dishes()->attach([$order['id'] => ['quantity' => $order['quantity']]]);
+            }
+            
+            return redirect()->route('payment.success')->with('success_message', 'Transaction successful. The ID is: '. $transaction->id);
         } else {
             $errorString = "";
     
@@ -52,7 +70,11 @@ class PaymentController extends Controller
                 $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             }
             
-            return back()->with('success_message', 'Transaction successful. The ID is: '. $result->message);
+            return redirect()->route('payment.success')->with('success_message', 'Transaction successful. The ID is: '. $result->message);
         }
+    }
+
+    public function done() {
+        return view('guests.success');
     }
 }

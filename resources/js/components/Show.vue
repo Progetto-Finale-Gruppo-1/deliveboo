@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+
+        <!-- Link alla pagina del pagamento da spostare adeguatamente dentro al Cart.vue -->
+        <a @click="confirmOrder" href="/guest/payment" class="btn btn-secondary">Al Pagamento</a>
+
         <div class="mb-3">
             <!-- Remove per pulizia in produzione -->
             <button @click="removeItems()" class="btn btn-warning">
@@ -29,28 +33,12 @@
                     </div>
                 </div>
             </div>
-
-            <div
-                class="col-2 d-flex flex-column justify-content-center align-items-center"
-            >
-                <form @submit.prevent="setItems(piatto)">
-                    <!-- <div>
-                        <input v-model.number="quantity" type="number" >
-                    </div> -->
-                    <button type="submit" class="btn btn-secondary">
-                        Add 1 to Cart
-                    </button>
-                </form>
-
-                <!-- <div>
-                    <input type="number" :name="'quantity'+piatto.id" value="1" min="1">
-                </div> -->
-                <button
-                    @click="delItems(piatto.user_id, piatto.id)"
-                    class="btn btn-warning"
-                >
-                    Remove from Cart
-                </button>
+            
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
+                
+                <button @click="setItems(piatto)" type="submit" class="btn btn-secondary">Add 1 to Cart</button>
+                
+                <button @click="delItems(piatto.user_id, piatto.id)" class="btn btn-warning">Remove from Cart</button>
             </div>
         </div>
     </div>
@@ -66,12 +54,11 @@ export default {
         return {
             storage_key: "cart_items",
             storageItems: [],
-        };
+        }
     },
 
     methods: {
         setItems(piatto) {
-            // console.log(document.querySelector(`input[name = 'quantity${piatto.id}']`));
 
             let change = false;
             let items = {};
@@ -154,6 +141,22 @@ export default {
             return JSON.parse(localStorage.getItem(this.storage_key));
         },
 
+        getItemsRaw () {
+            return localStorage.getItem(this.storage_key);
+        },
+
+        confirmOrder () {
+            let cartString = this.getItems();
+            let total = 0;
+            cartString.menu.forEach(el => {
+                total += el.price * el.quantity;
+            });
+
+            cartString.total = total;
+            
+            localStorage.setItem(this.storage_key, JSON.stringify(cartString));
+        },
+
         /**
          * Verifica che il ristorante sia quello selezionato
          * Restituendo vero o falso;
@@ -181,7 +184,7 @@ export default {
                             JSON.stringify(items)
                         );
                         console.log(items.menu.length);
-                        this.cartEmpty(items.menu.length);
+                        this.cartEmpty(items.menu.length);     
                     }
                 }
             }
