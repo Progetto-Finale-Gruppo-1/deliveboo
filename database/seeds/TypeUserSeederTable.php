@@ -19,7 +19,7 @@ class TypeUserSeederTable extends Seeder
         $type_id = Arr::pluck(Type::all(), 'id');
 
         foreach($users as $user){
-            $user->types()->sync([Arr::random($type_id)]);
+            $user->types()->sync([Arr::random($type_id),Arr::random($type_id)]);
         }
     }
 }

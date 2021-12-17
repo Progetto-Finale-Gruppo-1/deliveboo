@@ -49,7 +49,7 @@ class UserSeederTable extends Seeder
                 'city'=> 'Milano',
                 'zip_code'=> '20068',
                 'phone'=> '333131111',
-                'image'=> 'https://media-cdn.tripadvisor.com/media/photo-s/05/c8/4b/7a/ristorante-al-casale.jpg',
+                'image'=> 'img/ristoranti/il-casale-ristorante-pizzeria.jpg',
                 'description'=> $faker->text(100)
             ],
         ];
@@ -76,7 +76,7 @@ class UserSeederTable extends Seeder
             $user->description = $faker->text(100);
 
             $user->save();
-            $user->types()->sync([1,7]);
+            
             };
 
         }
