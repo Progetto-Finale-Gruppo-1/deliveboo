@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- @dd($categories, $types) --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-12">
@@ -23,6 +24,45 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="types" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Types') }}</label>
+
+                            @foreach ($types as $type)
+                            <div class="col-1">
+                                <label for="type{{ $type->id }}">{{ $type->name }}</label>
+                                <input id="type{{ $type->id }}" value="{{ $type->id }}" type="checkbox" class="form-control @error('name') is-invalid @enderror" name="types[]" value="{{ old('name') }}">
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @endforeach
+                            
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="types" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Category') }}</label>
+
+                            
+                            <div class="col-1">
+                                <select name="category" id="">
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
+                            
                         </div>
 
                         <div class="form-group row">
