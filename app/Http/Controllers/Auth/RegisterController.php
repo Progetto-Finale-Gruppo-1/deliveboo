@@ -74,9 +74,11 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {        
+    {       
+        // dd($data); 
         $data['image'] = Storage::put('users/images', $data['image']);
         return User::create([
+            'category_id' => $data['category'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
