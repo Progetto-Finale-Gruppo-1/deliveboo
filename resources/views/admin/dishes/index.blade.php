@@ -34,7 +34,7 @@
                         <tr >
                             <th class="align-bottom" scope="row"><a href="{{ route('admin.dishes.show', $dish->id)}}"><h3>{{ $dish->name }}</h3></a></th>
                             <th class="align-bottom" scope="row"><h3> @if($dish->available == 1 ) disponibile @else non disponibile @endif</h3></th>
-                            <td><a class="align-middle sec-butt" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
+                            <td class="align-middle"><a class="sec-butt" href="{{ route('admin.dishes.edit', $dish->id) }}">Edit</a></td>
                             <td>
                                 
                                 <form action="{{ route('admin.dishes.destroy', $dish->id) }}" method="POST">
