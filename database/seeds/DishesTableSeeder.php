@@ -19,7 +19,8 @@ class DishesTableSeeder extends Seeder
     {
         $user_ids = User::pluck('id')->toArray();
 
-        $dishes= [
+
+        $dishes = [
             [
                 'name' => 'Pizza Margherita',
                 'description'=> 'La pizza Margherita è la tipica pizza napoletana, condita con pomodoro, mozzarella (tradizionalmente è usato il fior di latte, non quella di bufala), basilico fresco, sale e olio; è, assieme alla pizza marinara, la più popolare pizza italiana.',
@@ -113,22 +114,31 @@ class DishesTableSeeder extends Seeder
             ],
 
         ];
+        
+        foreach($user_ids as $user){ // ciclo sugli user
 
-        foreach($dishes as $dish){
+            for($i=0;$i<3;$i++){ // per ogni user creo tre piatti
 
-            $newDish = new Dish();
+                $dishIndex = rand(0, count($dishes) - 1); 
+                // piatto singolo = array dishes[numero randomico]
+                // ogni ristorante cosí ha 3 piatti randomicamente scelti 
+                $dish = $dishes[$dishIndex];
+            
+                $newDish = new Dish();
 
-            $newDish->user_id = Arr::random($user_ids);
-            $newDish->name = $dish['name'];
-            $newDish->description = $dish['description'];
-            $newDish->available = $faker->numberBetween(0, 1);
-            $newDish->price = $dish['price'];
-            $newDish->weigth = $faker->numberBetween(2, 100);
-            $newDish->image = $dish['image'];
+                $newDish->user_id = $user;
+                $newDish->name = $dish['name'];
+                $newDish->description = $dish['description'];
+                $newDish->available = $faker->numberBetween(0, 1);
+                $newDish->price = $dish['price'];
+                $newDish->weigth = $faker->numberBetween(2, 100);
+                $newDish->image = $dish['image'];
 
-            $newDish->save();
+                $newDish->save();
+                
+            }
         }
 
-        
+
     }
 }
