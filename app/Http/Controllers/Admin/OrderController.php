@@ -24,6 +24,7 @@ class OrderController extends Controller
         ->select('orders.*')
         ->where('dishes.user_id', '=', Auth::user()->id)
         ->orderBy('orders.created_at', 'desc')
+        ->groupBy('orders.id')
         ->get();
 
         return view('admin.orders.index', compact('orders'));
