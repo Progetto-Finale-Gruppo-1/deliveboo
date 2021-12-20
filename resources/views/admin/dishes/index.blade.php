@@ -12,7 +12,7 @@
                 </div>
             @endif
             
-            <a class="btn white-butt-hover white col-lg-2 col-12 col-md-3 mb-4" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
+            <a class="btn white-butt-hover yell col-lg-2 col-12 col-md-3 mb-4" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
             
             <h2 class="mb-5">Lista Piatti</h2>
             

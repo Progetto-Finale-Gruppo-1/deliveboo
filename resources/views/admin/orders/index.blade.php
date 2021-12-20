@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+<div class="container index-wrapper p-5">
+
+    <div class="container container-order-index">
+
         <div class="row">
 
-            <a class="btn btn-secondary mb-3" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
+            <a class="btn white-butt-hover yell mb-5" href='{{ route('admin.dashboard')}}'> Torna indietro</a>
 
             <table class="table">
             
@@ -38,5 +41,8 @@
             </table>
 
         </div>
+
     </div>
+
+</div>
 @endsection

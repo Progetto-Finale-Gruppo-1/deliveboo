@@ -1,17 +1,19 @@
-.container-dashbnoard{
-    height: 100%;
-    h2{
-        padding-bottom: 10px;
-        font-size: 3.5em;
-        font-style: italic;
-        font-weight: 600;
-    }
-
-    .container-button{
-        a{
-            text-decoration: none;          
-            :hover{
-                text-decoration: none;
+.dashboard-wrapper{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border-radius: 30px;
+    .container-dashboard{
+        .row{
+            .container-btn-name{
+                h2{
+                    font-size: 3em;
+                    font-weight: 700;
+                    font-style: italic;
+                }
+            }
+            .container-img{
+                img{
+                    border-radius: 20px;
+                }
             }
         }
     }
