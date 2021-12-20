@@ -158,7 +158,7 @@ class UserSeederTable extends Seeder
             $user->zip_code = $restaurant['zip_code'];
             $user->phone = $faker->numerify('##########');;
             $user->image = $restaurant['image'];
-            $user->description = $faker->text(100);
+            $user->description = $restaurant['description'];
 
             $user->save();
             
