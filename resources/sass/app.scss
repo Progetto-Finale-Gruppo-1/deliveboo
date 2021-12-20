@@ -19,6 +19,11 @@
 }
 #app{
     min-height: 100vh;
+    
+        height: 100%;
+        background-image: url('/img/Wave.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
 }
 nav{
     background-color: $primC;

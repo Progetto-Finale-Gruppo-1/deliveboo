@@ -33,7 +33,7 @@ class UserController extends Controller
             });
         }
 
-        $data = $user_query->paginate(5);
+        $data = $user_query->paginate(6);
         return response()->json($data);
     }
 
