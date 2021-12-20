@@ -1,21 +1,19 @@
 <template>
     <div class="container">
 
-        <!-- Link alla pagina del pagamento da spostare adeguatamente dentro al Cart.vue -->
-        <a @click="confirmOrder" href="/guest/payment" class="btn btn-secondary">Al Pagamento</a>
-
-        <div class="mb-3">
-            <!-- Remove per pulizia in produzione -->
+        <!-- <div class="mb-3">
+            Remove per pulizia in produzione
             <button @click="removeItems()" class="btn btn-warning">
                 Remove items
             </button>
-        </div>
+        </div> -->
         <div v-for="piatto in dato" :key="piatto.id" class="row">
             <div class="card col-10 mb-3">
                 <div class="row">
                     <div class="col-4">
+                        <!-- La src dal database dell'immagine dovrebbe essere passata dal blade durante la creazione -->
                         <img
-                            :src="piatto.image"
+                            :src="piatto.image.startsWith('users/images') != undefined ? 'http://127.0.0.1:8000/storage/' + piatto.image : piatto.image"
                             class="img-fluid rounded-start"
                             alt="..."
                         />
@@ -36,9 +34,9 @@
             
             <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
                 
-                <button @click="setItems(piatto)" type="submit" class="btn btn-secondary">Add 1 to Cart</button>
+                <button @click="setItems(piatto)" type="submit" class="btn btn-secondary">Aggiungi 1 quantità</button>
                 
-                <button @click="delItems(piatto.user_id, piatto.id)" class="btn btn-warning">Remove from Cart</button>
+                <button @click="delItems(piatto.user_id, piatto.id)" class="btn btn-warning">Rimuovi dal carrello</button>
             </div>
         </div>
     </div>
@@ -139,22 +137,6 @@ export default {
 
         getItems() {
             return JSON.parse(localStorage.getItem(this.storage_key));
-        },
-
-        getItemsRaw () {
-            return localStorage.getItem(this.storage_key);
-        },
-
-        confirmOrder () {
-            let cartString = this.getItems();
-            let total = 0;
-            cartString.menu.forEach(el => {
-                total += el.price * el.quantity;
-            });
-
-            cartString.total = total;
-            
-            localStorage.setItem(this.storage_key, JSON.stringify(cartString));
         },
 
         /**

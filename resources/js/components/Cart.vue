@@ -20,7 +20,7 @@
                                 @click="item.check = !item.check"
                             />
                         </th>
-                        <td>{{ item.name }}</td>
+                        <th>{{ item.name }}</th>
                         <td>{{ item.price }}€</td>
                         <td>
                             <button
@@ -50,9 +50,14 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-success" @click="confirmOrder">
+            
+
+            <!-- Link alla pagina del pagamento -->
+            <a @click="confirmOrder" href="/guest/payment" class="btn btn-success">Conferma Ordine</a>
+            
+            <!-- <button class="btn btn-success" @click="confirmOrder">
                 Confirm Order
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
@@ -61,8 +66,8 @@
 export default {
     data() {
         return {
-            cartItems: [],
-            orderItem: [],
+            cartItems: {},
+            orderItem: {},
             STORAGE_KEY: "cart_items",
             STORAGE_KEY_CONFIRM: "cart_confirm",
         };
@@ -70,13 +75,21 @@ export default {
 
     created() {
         this.cartItems = JSON.parse(
-            localStorage.getItem(this.STORAGE_KEY) || "[]"
+            localStorage.getItem(this.STORAGE_KEY)
         );
+        //Inizializzo l'oggetto orderItem dandogli le proprietà di partenza
+        this.orderItem.restaurant = this.cartItems.restaurant;
+        this.orderItem.menu = [];
+        console.log(this.orderItem);
     },
 
     methods: {
         add(item) {
+            console.log(item);
             item.quantity++;
+            // item.check = !item.check;
+            
+            // console.log(item);
         },
 
         pick(item) {
@@ -91,23 +104,41 @@ export default {
             );
         },
 
-        confirmOrder() {
-            if (this.orderItem.length == 0) {
-                alert("inserischi");
-            } else {
-                localStorage.setItem(
-                    this.STORAGE_KEY_CONFIRM,
-                    JSON.stringify(this.orderItem)
-                );
-            }
+        getItems() {
+            return JSON.parse(localStorage.getItem(this.storage_key));
+        },
+
+        // confirmOrder() {
+        //     if (this.orderItem.length == 0) {
+        //         alert("inserischi");
+        //     } else {
+        //         localStorage.setItem(
+        //             this.STORAGE_KEY_CONFIRM,
+        //             JSON.stringify(this.orderItem)
+        //         );
+        //     }
+        // },
+
+        confirmOrder () {
+            let total = 0;
+            console.log(this.orderItem.menu.length);
+            this.orderItem.menu.forEach(el => {
+                total += el.price * el.quantity;
+            });
+
+            this.orderItem.total = total;
+            
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.orderItem));
         },
 
         selection(item) {
+            console.log('click');
             if (item.check) {
-                this.orderItem.push(item);
+                this.orderItem.menu.push(item);
             } else {
-                this.orderItem.splice(this.orderItem.indexOf(item), 1);
+                this.orderItem.menu.splice(this.orderItem.menu.indexOf(item), 1);
             }
+            console.log(this.orderItem);
         },
     },
 };
