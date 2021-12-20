@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Ristorante: {{$user->name}}</h2>
+    <div class="container mb-3">
+        <div class="row">
+            <h2 class="col-12 text-white">Ristorante: {{$user->name}}</h2>
+        </div>
+    </div>
     <show-component :dato="{{ $dishes }}"></show-component>
 @endsection
 

@@ -7,18 +7,18 @@
                 Remove items
             </button>
         </div> -->
-        <div v-for="piatto in dato" :key="piatto.id" class="row">
-            <div class="card col-10 mb-3">
+        <div v-for="piatto in dato" :key="piatto.id" class="row mb-5">
+            <div class="card col-12 col-lg-10 mb-3 mb-lg-0">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-12 col-lg-4">
                         <!-- La src dal database dell'immagine dovrebbe essere passata dal blade durante la creazione -->
                         <img
-                            :src="piatto.image.startsWith('users/images') != undefined ? 'http://127.0.0.1:8000/storage/' + piatto.image : piatto.image"
+                            :src="piatto.image.startsWith('users/images') ? 'http://127.0.0.1:8000/guest/storage/' + piatto.image : piatto.image"
                             class="img-fluid rounded-start"
                             alt="..."
                         />
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-12 col-lg-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ piatto.name }}</h5>
                             <p class="card-text">{{ piatto.description }}</p>
@@ -32,11 +32,11 @@
                 </div>
             </div>
             
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">                
+            <div class="col-12 col-lg-2 d-flex flex-lg-column justify-content-lg-center align-items-center">                
                 
-                <button @click="setItems(piatto)" type="submit" class="btn btn-secondary">Aggiungi 1 quantità</button>
+                <button @click="setItems(piatto)" type="submit" class="white-butt mr-3 mr-lg-0 mb-0 mb-lg-3">Aggiungi 1 quantità</button>
                 
-                <button @click="delItems(piatto.user_id, piatto.id)" class="btn btn-warning">Rimuovi dal carrello</button>
+                <button @click="delItems(piatto.user_id, piatto.id)" class="sec-butt">Rimuovi dal carrello</button>
             </div>
         </div>
     </div>
@@ -191,8 +191,6 @@ export default {
 };
 </script>
 
-<style scoped>
-input {
-    width: 50px;
-}
+<style>
+
 </style>
