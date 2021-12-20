@@ -38,7 +38,7 @@ class UserSeederTable extends Seeder
                 'zip_code'=> '20068',
                 'phone'=> '333132312',
                 'image'=> 'https://media-cdn.tripadvisor.com/media/photo-s/15/29/39/c5/carpe-diem.jpg',
-                'description'=> $faker->text(100)
+                'description'=> 'Il nostro locale si compone di due ambienti ampi ed accoglienti, arredati con gusto e sobrietà. Uno è dedicato agli apericena, l\'altro, più ampio, è riservato alle cene e ai banchetti. A disposizione dei nostri clienti, ampio parcheggio, anche per camionisti, con sosta illimitata per chi mangia al ristorante.'
             ],
             [
                 'name' => 'Ginza',
@@ -50,7 +50,7 @@ class UserSeederTable extends Seeder
                 'zip_code'=> '20068',
                 'phone'=> '333132334',
                 'image'=> 'https://www.ristoranteginza.com/wp-content/uploads/2019/04/ristorante-2.jpg',
-                'description'=> $faker->text(100)
+                'description'=> 'Ginza Sushi è un locale che si trova a Milano, in via Viale Ergisto Bezzi 79 numero . L’attività ha rivevuto un giudizio di 79 dal nostro raccoglitore di recensioni dal web, lo Sluurpometro, che scandaglia le recensioni presenti sul web, e le pesa restituendo una media ponderata in centesimi.'
             ],
             [
                 'name' => 'Il Casale Ristorante',
@@ -62,7 +62,7 @@ class UserSeederTable extends Seeder
                 'zip_code'=> '20068',
                 'phone'=> '333131111',
                 'image'=> 'https://media-cdn.tripadvisor.com/media/photo-s/05/c8/4b/81/ristorante-al-casale.jpg',
-                'description'=> $faker->text(100)
+                'description'=> 'Prova la cucina della Locanda Il Casale. La tradizione incontra l\'innovazione. Disponibilità per eventi e pranzi e cene aziendali.Disponibilità di B&B con 4 camere arredate.'
             ],
             [
                 'name' => 'Mexico',
