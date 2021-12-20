@@ -1,15 +1,15 @@
 <template>
     <div class="container">
-        
-        <div class="jambotron mb-5 pb-sm-3">
-            <div class="row">
-                <div class="col-12 my_img"></div>
+
+            <div class="jambotron mb-5 pb-sm-3">
+                <div class="row">
+                    <div class="col-12 my_img"></div>
+                </div>
             </div>
-        </div>
 
         <div class="row mb-5 text-center search">
             <div class="col-lg-3 col-12 mb-3">
-                <input class="col-12 white-input" placeholder="Cerca un piatto" type="text" v-model="selected.query" />
+                <input class="col-12 white-input" placeholder="Cerca un ristorante" type="text" v-model="selected.query" />
             </div>
             
             <div class="col-lg-9 col-md-12 mt-3 d-flex flex-wrap">
@@ -138,7 +138,7 @@ export default {
 <style lang="scss">
 
     .text-input{
-        color:black;
+        color:white;
         font-size: 0.9rem;
         font-style: italic;
         // box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
