@@ -17,7 +17,10 @@
                             <input
                                 type="checkbox"
                                 @change="selection(item)"
-                                @click="item.check = !item.check"
+                                @click="item.check = !item.check" 
+                                v-model="item.check"
+
+                                
                             />
                         </th>
                         <th>{{ item.name }}</th>
@@ -80,16 +83,11 @@ export default {
         //Inizializzo l'oggetto orderItem dandogli le proprietà di partenza
         this.orderItem.restaurant = this.cartItems.restaurant;
         this.orderItem.menu = [];
-        console.log(this.orderItem);
     },
 
     methods: {
         add(item) {
-            console.log(item);
             item.quantity++;
-            // item.check = !item.check;
-            
-            // console.log(item);
         },
 
         pick(item) {
@@ -104,10 +102,6 @@ export default {
             );
         },
 
-        getItems() {
-            return JSON.parse(localStorage.getItem(this.storage_key));
-        },
-
         // confirmOrder() {
         //     if (this.orderItem.length == 0) {
         //         alert("inserischi");
@@ -120,15 +114,19 @@ export default {
         // },
 
         confirmOrder () {
-            let total = 0;
-            console.log(this.orderItem.menu.length);
-            this.orderItem.menu.forEach(el => {
-                total += el.price * el.quantity;
-            });
+            if (this.orderItem.menu.length == 0) {
+                alert("inserisci");
+            } else {
+                let total = 0;
+                console.log(this.orderItem.menu.length);
+                this.orderItem.menu.forEach(el => {
+                    total += el.price * el.quantity;
+                });
 
-            this.orderItem.total = total;
-            
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.orderItem));
+                this.orderItem.total = total;
+                
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.orderItem));
+            }
         },
 
         selection(item) {
