@@ -23,6 +23,7 @@
                         :id="`input${type.id}`"
                         :value="type.name"
                         v-model="selected.checked"
+                        @click="selected.page = 1"
                     />
                     <label class="text-input" :for="`input${type.id}`">{{ type.name }}</label>
                 </div>
