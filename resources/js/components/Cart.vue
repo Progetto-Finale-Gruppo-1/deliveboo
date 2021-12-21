@@ -56,7 +56,7 @@
             
 
             <!-- Link alla pagina del pagamento -->
-            <a @click="confirmOrder" href="/guest/payment" class="btn btn-success">Conferma Ordine</a>
+            <a @click="confirmOrder" :href="cartItems.menu[0].check == true ? `${confirm}` : '#' " class="btn btn-success">Conferma Ordine</a>
             
             <!-- <button class="btn btn-success" @click="confirmOrder">
                 Confirm Order
@@ -73,6 +73,7 @@ export default {
             orderItem: {},
             STORAGE_KEY: "cart_items",
             STORAGE_KEY_CONFIRM: "cart_confirm",
+            confirm: '/guest/payment'
         };
     },
 
@@ -83,6 +84,7 @@ export default {
         //Inizializzo l'oggetto orderItem dandogli le proprietà di partenza
         this.orderItem.restaurant = this.cartItems.restaurant;
         this.orderItem.menu = [];
+        console.log(this.cartItems.menu);
     },
 
     methods: {
@@ -115,7 +117,7 @@ export default {
 
         confirmOrder () {
             if (this.orderItem.menu.length == 0) {
-                alert("inserisci");
+                alert("Seleziona un piatto dalla lista.");
             } else {
                 let total = 0;
                 console.log(this.orderItem.menu.length);
