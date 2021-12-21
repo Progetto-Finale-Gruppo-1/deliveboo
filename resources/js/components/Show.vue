@@ -92,7 +92,7 @@ export default {
                 } else {
                     // Altrimenti il ristorante non è lo stesso, e viene richiesta la conferma per la cancellazione del carrello
                     const confirm = window.confirm(
-                        "Non puoi aggiungere piatti al carrello di un altro ristorante"
+                        "Non puoi aggiungere piatti al carrello di un altro ristorante, proseguendo eliminerai il carrello già esistente"
                     );
                     console.log(confirm);
                     // Se la conferma è positiva restituisce -true- e rimuoviamo tutte le informazioni dal localStorage e poi aggiungiamo il piatto selezionato
