@@ -9,7 +9,7 @@
 
         <div class="row mb-5 text-center search">
             <div class="col-lg-3 col-12 mb-3">
-                <input class="col-12 white-input" placeholder="Cerca un ristorante" type="text" v-model="selected.query" />
+                <input class="col-12 white-input" placeholder="Cerca un ristorante" @keydown="selected.page = 1" type="text" v-model="selected.query" />
             </div>
             
             <div class="col-lg-9 col-md-12 mt-3 d-flex flex-wrap">
