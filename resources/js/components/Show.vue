@@ -13,7 +13,7 @@
                     <div class="col-12 col-lg-4">
                         <!-- La src dal database dell'immagine dovrebbe essere passata dal blade durante la creazione -->
                         <img
-                            :src="piatto.image.startsWith('users/images') ? 'http://127.0.0.1:8000/guest/storage/' + piatto.image : piatto.image"
+                            :src="piatto.image.startsWith('dishes/images') ? 'http://127.0.0.1:8000/storage/' + piatto.image : piatto.image"
                             class="img-fluid rounded-start"
                             alt="..."
                         />
