@@ -20,3 +20,11 @@
     
     <h2>Pagamento avvenuto con sucesso</h2>
 @endsection
+
+@section('script')
+    <script>
+        window.onload = function() {
+            localStorage.removeItem('cart_items')
+        }
+    </script>
+@endsection
