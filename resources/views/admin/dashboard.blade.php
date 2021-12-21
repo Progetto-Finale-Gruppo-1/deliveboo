@@ -18,17 +18,17 @@
             </div>
         
             <div class="container-status col-12">
-                <p class="status-info white-butt mb-4 col-2">{{ __('Login effettuato!') }}</p>
+                <p class="status-info white-butt mb-4 col-5 col-lg-2">{{ __('Login effettuato!') }}</p>
             </div>
 
         <!-- contenitore username e bottoni di reindirizzamento -->
             <div class="container container-btn-name justify-content-between mb-4 row">
 
-                <div class="col-7">
+                <div class="col-12 col-lg-7">
                     <h2 class="">Bentornato: {{ $user->name }}</h2>
                 </div>
 
-                <div class="container-button align-self-center col-4">
+                <div class="container-button align-self-center col-12 col-lg-4">
                         <a class="prim-butt" href="{{ route('admin.dishes.index')}}">I tuoi Piatti</a>
                         <a class="sec-butt" href="{{ route('admin.orders.index')}}">Ordini ricevuti</a>
                 </div>
